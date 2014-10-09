@@ -19,19 +19,17 @@ class EsiController
     public function blockAction()
     {
         $blockName = $this->params()->fromRoute('block');
-        $handles   = (array) $this->params()->fromQuery('handles');
         if (!$blockName) {
             return $this->blockNotFound($blockName);
         }
        
         /* @var $blockManager \ConLayout\Controller\Plugin\BlockManager */
         $blockManager = $this->blockManager();         
-        $blockManager->setHandles($handles);
         /* @var $block ViewModel */
         $block = $blockManager->getBlock($blockName);
-                
+
         if (!$block instanceof ViewModel) {
-            return $this->blockNotFound($blockName);
+            $block = $this->blockNotFound($blockName);
         }
         $block->setTerminal(true);
         
