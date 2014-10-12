@@ -26,5 +26,12 @@ return array(
                 )
             )
         )
+    ),
+    'varnish' => array(
+        'cacheable_routes' => array(
+            'home' => array(
+                'ttl' => 60
+            )
+        )
     )
 );
