@@ -38,13 +38,11 @@ sub vcl_recv {
         return (pipe);
     }
     
-    # purge request
     if (req.request == "PURGE") {
         if (!client.ip ~ purge) {
             error 405 "Not allowed.";
         }
-        ban("obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host + " && obj.http.X-Purge-URL ~ " + req.http.X-Purge-Regex + " && obj.http.Content-Type ~ " + req.http.X-Purge-Content-Type);
-        error 200 "Purged.";
+        return (lookup);
     }
 
     # we only deal with GET and HEAD by default    
@@ -117,15 +115,31 @@ sub vcl_hash {
     return (hash);
 }
 
-# sub vcl_hit {
-#     return (deliver);
-# }
-# 
-# sub vcl_miss {
-#     return (fetch);
-# }
+sub vcl_hit {
+    if (req.request == "PURGE") {
+        if (!client.ip ~ purge) {
+            error 405 "Not allowed.";
+        }
+        purge;
+        error 200 "Purged";
+    }
+    return (deliver);
+}
+ 
+sub vcl_miss {
+    if (req.request == "PURGE") {
+        if (!client.ip ~ purge) {
+            error 405 "Not allowed.";
+        }
+        purge;
+        error 404 "Not in cache";
+    }
+    return (fetch);
+}
 
 sub vcl_fetch {
+    set beresp.http.x-url = req.url;
+    set beresp.http.x-host = req.http.host;
     if (beresp.status == 500) {
        set beresp.saintmode = 10s;
        return (restart);
@@ -137,7 +151,6 @@ sub vcl_fetch {
         unset beresp.http.Surrogate-Control;
         set beresp.do_esi = true;
     }
-    set beresp.do_esi = true;
 
     # add ban-lurker tags to object
     set beresp.http.X-Purge-URL = req.url;
@@ -165,6 +178,8 @@ sub vcl_fetch {
 
 sub vcl_deliver {
     # debug info
+    unset resp.http.x-url;
+    unset resp.http.x-host;
     if (resp.http.X-Cache-Debug) {
         if (obj.hits > 0) {
             set resp.http.X-Cache = "HIT";

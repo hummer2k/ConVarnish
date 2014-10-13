@@ -1,9 +1,12 @@
 <?php
 namespace ConVarnish\Listener;
 
-use Zend\EventManager\EventManagerInterface,
+use ConVarnish\Options\VarnishOptions,
+    Zend\EventManager\EventManagerInterface,
     Zend\EventManager\ListenerAggregateInterface,
     Zend\EventManager\ListenerAggregateTrait,
+    Zend\Http\Header\CacheControl,
+    Zend\Http\Header\GenericHeader,
     Zend\Mvc\MvcEvent;
 
 /**
@@ -17,7 +20,7 @@ class RouteListener
         
     /**
      *
-     * @var \ConVarnish\Options\VarnishOptions
+     * @var VarnishOptions
      */
     protected $varnishOptions;
     
@@ -25,7 +28,7 @@ class RouteListener
      * 
      * @param array $varnishOptions
      */
-    public function __construct(\ConVarnish\Options\VarnishOptions $varnishOptions)
+    public function __construct(VarnishOptions $varnishOptions)
     {
         $this->varnishOptions = $varnishOptions;
     }
@@ -78,12 +81,14 @@ class RouteListener
         $ttl = isset($cacheOptions['ttl']) 
             ? $cacheOptions['ttl']
             : $this->varnishOptions->getDefaultTtl();
+        $headers = $e->getResponse()->getHeaders();
         
-        $cacheControl = new \Zend\Http\Header\CacheControl();
+        $cacheControl = new CacheControl();
         $cacheControl->addDirective('s-maxage', $ttl);
-        
-        $headers = $e->getResponse()->getHeaders();        
         $headers->addHeader($cacheControl);
+        
+        $debug = new GenericHeader('X-Cache-Debug', '1');
+        $headers->addHeader($debug);
         
         return $this;
     }

@@ -29,6 +29,12 @@ class VarnishOptions
     protected $cacheableRoutes = array();
     
     /**
+     *
+     * @var boolean
+     */
+    protected $debug = false;
+    
+    /**
      * 
      * @return boolean
      */
@@ -87,5 +93,16 @@ class VarnishOptions
     public function getCacheableRoutes()
     {
         return $this->cacheableRoutes;
+    }
+    
+    public function getDebug()
+    {
+        return $this->debug;
+    }
+
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
+        return $this;
     }
 }
