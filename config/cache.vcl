@@ -11,8 +11,9 @@ backend default {
 #}
 
 acl purge {
-  "localhost";
-  "127.0.0.1";
+    "localhost";
+    "127.0.0.1";
+    "192.168.0.21";
 }
 
 sub vcl_recv {
@@ -42,6 +43,7 @@ sub vcl_recv {
         if (!client.ip ~ purge) {
             error 405 "Not allowed.";
         }
+        ban("obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host + " && obj.http.X-Purge-URL ~ " + req.http.X-Purge-Regex + " && obj.http.Content-Type ~ " + req.http.X-Purge-Content-Type);
         return (lookup);
     }
 
@@ -117,9 +119,6 @@ sub vcl_hash {
 
 sub vcl_hit {
     if (req.request == "PURGE") {
-        if (!client.ip ~ purge) {
-            error 405 "Not allowed.";
-        }
         purge;
         error 200 "Purged";
     }
@@ -128,9 +127,6 @@ sub vcl_hit {
  
 sub vcl_miss {
     if (req.request == "PURGE") {
-        if (!client.ip ~ purge) {
-            error 405 "Not allowed.";
-        }
         purge;
         error 404 "Not in cache";
     }
