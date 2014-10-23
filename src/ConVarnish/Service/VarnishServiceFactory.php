@@ -18,7 +18,10 @@ class VarnishServiceFactory
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $varnishService = new VarnishService();
+        $options = $serviceLocator->get('ConVarnish\Options\VarnishOptions');
+        $varnishService = new VarnishService(
+            $options->getServers()
+        );
         return $varnishService;
     }
 }

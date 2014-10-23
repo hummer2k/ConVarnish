@@ -3,17 +3,9 @@ backend default {
   .port = "8080";
 }
 
-#backend admin {
-#  .host = "127.0.0.1";
-#  .port = "8080";
-#  .first_byte_timeout = 18000s;
-#  .between_bytes_timeout = 18000s;
-#}
-
 acl purge {
     "localhost";
     "127.0.0.1";
-    "192.168.0.21";
 }
 
 sub vcl_recv {
@@ -56,7 +48,7 @@ sub vcl_recv {
     set req.url = regsub(req.url, "^http[s]?://[^/]+", "");
     
     # static files are always cacheable. remove SSL flag and cookie
-    if (req.url ~ "^/(media|js|skin)/.*\.(png|jpg|jpeg|gif|css|js|swf|ico)$") {
+    if (req.url ~ "^/(css|img|js)/.*\.(png|jpg|jpeg|gif|css|js|swf|ico)$") {
         unset req.http.Https;
         unset req.http.Cookie;
     }
@@ -106,9 +98,6 @@ sub vcl_recv {
 
 sub vcl_hash {
     hash_data(req.url);
-    if (req.url ~ "^/userblock/name.php$") {
-        hash_data(regsub(req.http.Cookie, ".*PHPSESSID=([^;]+).*", "\1"));
-    }
     if (req.http.host) {
         hash_data(req.http.host);
     } else {

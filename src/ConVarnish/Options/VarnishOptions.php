@@ -35,6 +35,13 @@ class VarnishOptions
     protected $debug = false;
     
     /**
+     * varnish cache instances
+     * 
+     * @var array
+     */
+    protected $servers = array();
+    
+    /**
      * 
      * @return boolean
      */
@@ -105,4 +112,17 @@ class VarnishOptions
         $this->debug = $debug;
         return $this;
     }
+    
+    public function getServers()
+    {
+        return $this->servers;
+    }
+
+    public function setServers($servers)
+    {
+        $this->servers = $servers;
+        return $this;
+    }
+
+
 }
