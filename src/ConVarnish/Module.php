@@ -39,7 +39,7 @@ class Module
         $sharedEvents->attach('ConLayout\View\Renderer\BlockRenderer', 'render.pre', function($e) {
             /* @var $viewModel ViewModel */
             $viewModel = $e->getParam('viewModel');
-            if (null !== $viewModel->getOption('esi')) {
+            if ($viewModel instanceof ViewModel && null !== $viewModel->getOption('esi')) {
                 $viewModel->setTemplate('esi');
             }
         });

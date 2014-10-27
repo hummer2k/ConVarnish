@@ -87,8 +87,10 @@ class RouteListener
         $cacheControl->addDirective('s-maxage', $ttl);
         $headers->addHeader($cacheControl);
         
-        $debug = new GenericHeader('X-Cache-Debug', '1');
-        $headers->addHeader($debug);
+        if ($this->varnishOptions->getDebug()) {
+            $debug = new GenericHeader('X-Cache-Debug', '1');
+            $headers->addHeader($debug);
+        }
         
         return $this;
     }
