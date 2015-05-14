@@ -2,6 +2,7 @@
 return array(
     'varnish' => array(
         'cache_enabled' => false,
+        'use_esi' => false,
         'default_ttl' => 14400,
         'servers' => array(
             'default' => array(

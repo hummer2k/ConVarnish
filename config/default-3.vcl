@@ -82,20 +82,6 @@ sub vcl_recv {
     return (lookup);
 }
 
-# sub vcl_pipe {
-#     # Note that only the first request to the backend will have
-#     # X-Forwarded-For set.  If you use X-Forwarded-For and want to
-#     # have it set for all requests, make sure to have:
-#     # set bereq.http.connection = "close";
-#     # here.  It is not set by default as it might break some broken web
-#     # applications, like IIS with NTLM authentication.
-#     return (pipe);
-# }
-# 
-# sub vcl_pass {
-#     return (pass);
-# }
-
 sub vcl_hash {
     hash_data(req.url);
     if (req.http.host) {
@@ -123,14 +109,6 @@ sub vcl_miss {
 }
 
 sub vcl_fetch {
-    set beresp.http.x-url = req.url;
-    set beresp.http.x-host = req.http.host;
-    if (beresp.status == 500) {
-       set beresp.saintmode = 10s;
-       return (restart);
-    }
-    set beresp.grace = 5m;
-
     # Enable esi processing 
     if (beresp.http.Surrogate-Control ~ "ESI/1.0") {
         unset beresp.http.Surrogate-Control;
@@ -192,39 +170,3 @@ sub vcl_deliver {
         set resp.http.Age = "0";
     }
 }
-
-# sub vcl_error {
-#     set obj.http.Content-Type = "text/html; charset=utf-8";
-#     set obj.http.Retry-After = "5";
-#     synthetic {"
-# <?xml version="1.0" encoding="utf-8"?>
-# <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-#  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-# <html>
-#   <head>
-#     <title>"} + obj.status + " " + obj.response + {"</title>
-#   </head>
-#   <body>
-#     <h1>Error "} + obj.status + " " + obj.response + {"</h1>
-#     <p>"} + obj.response + {"</p>
-#     <h3>Guru Meditation:</h3>
-#     <p>XID: "} + req.xid + {"</p>
-#     <hr>
-#     <p>Varnish cache server</p>
-#   </body>
-# </html>
-# "};
-#     return (deliver);
-# }
-# 
-# sub vcl_init {
-#   return (ok);
-# }
-# 
-# sub vcl_fini {
-#   return (ok);
-# }
-
-#sub design_exception {
-#}
-

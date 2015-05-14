@@ -5,6 +5,14 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'view_helpers' => [
+        'factories' => [
+            'ConVarnish\View\Helper\EsiUrl' => 'ConVarnish\View\Helper\EsiUrlFactory'
+        ],
+        'aliases' => [
+            'esiUrl' => 'ConVarnish\View\Helper\EsiUrl'
+        ]
+    ],
     'controllers' => array(
         'invokables' => array(
             'ConVarnish\Controller\Esi' => 'ConVarnish\Controller\EsiController'
