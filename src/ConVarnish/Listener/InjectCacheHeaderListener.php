@@ -66,16 +66,21 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        if ($this->varnishOptions->isCacheEnabled()) {
-            $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectCacheHeader'), -10);
-            if ($this->varnishOptions->useEsi()) {
-                $events->attach(MvcEvent::EVENT_DISPATCH, [$this, 'determineEsiProcessing'], -15);
-                $events->getSharedManager()->attach(
-                    'ConLayout\Block\Factory\BlockFactory',
-                    'createBlock.post',
-                    [$this, 'injectEsi']
-                );
-            }
+        $this->listeners[] = $events->attach(
+            MvcEvent::EVENT_DISPATCH,
+            [$this, 'injectCacheHeader'],
+            -10
+        );
+        if (
+            $this->varnishOptions->isCacheEnabled() &&
+            $this->varnishOptions->useEsi()
+        ) {
+            $events->attach(MvcEvent::EVENT_DISPATCH, [$this, 'determineEsiProcessing'], -15);
+            $events->getSharedManager()->attach(
+                'ConLayout\Block\Factory\BlockFactory',
+                'createBlock.post',
+                [$this, 'injectEsi']
+            );
         }
     }
 
@@ -109,6 +114,9 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
             if (isset($esiOptions['ttl'])) {
                 $this->ttl = (int) $esiOptions['ttl'];
             }
+        }
+        if (!$this->varnishOptions->isCacheEnabled()) {
+            $this->ttl = 0;
         }
         $cacheControl = new CacheControl();
         $directives = [

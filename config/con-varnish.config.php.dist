@@ -1,19 +1,42 @@
 <?php
-return array(
-    'varnish' => array(
+return [
+    'varnish' => [
+        /**
+         * enable caching
+         */
         'cache_enabled' => false,
+        /**
+         * enable esi processing
+         */
         'use_esi' => false,
+        /**
+         * default ttl when no specified in 'cacheable_routes'
+         */
         'default_ttl' => 14400,
-        'servers' => array(
-            'default' => array(
+        /**
+         * varnish servers
+         */
+        'servers' => [
+            'default' => [
                 'host' => 127.0.0.1,
                 'port' => 80
-            )
-        ),
-        'cacheable_routes' => array(
-            'home' => array(
-                'ttl' => 60
-            )
-        )
-    )
-);
+            ]
+        ],
+        'cacheable_routes' => [
+            /**
+             * format:
+             *
+             * routeName => options
+             *
+             * e.g.:
+             *   cache route 'home' for 60 seconds
+             *  'home' => [
+             *      'ttl' => 60
+             *  ]
+             *
+             *  cache all routes that start with application for 120 seconds
+             *  'application*' => 120
+             */
+        ]
+    ]
+];
