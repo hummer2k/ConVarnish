@@ -96,9 +96,13 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
         }
 
         if (false !== $cacheOptions) {
-            $this->ttl = isset($cacheOptions['ttl'])
-                ? $cacheOptions['ttl']
-                : $this->varnishOptions->getDefaultTtl();
+            if (is_array($cacheOptions) && isset($cacheOptions['ttl'])) {
+                $this->ttl = (int) $cacheOptions['ttl'];
+            } elseif (is_int($cacheOptions)) {
+                $this->ttl = $cacheOptions;
+            } else {
+                $this->ttl = $this->varnishOptions->getDefaultTtl();
+            }
         } else {
             $viewModel = $e->getViewModel();
             $esiOptions = (array) $viewModel->getOption('esi', []);
@@ -106,11 +110,19 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
                 $this->ttl = (int) $esiOptions['ttl'];
             }
         }
-        if ($this->ttl > 0) {
-            $cacheControl = new CacheControl();
-            $cacheControl->addDirective('s-maxage', $this->ttl);
-            $headers->addHeader($cacheControl);
+        $cacheControl = new CacheControl();
+        $directives = [
+            'no-store' => true,
+            'no-chace' => true,
+            'must-revalidate' => true,
+            'post-check' => 0,
+            'pre-check' => 0,
+            's-maxage' => $this->ttl,
+        ];
+        foreach ($directives as $directive => $value) {
+            $cacheControl->addDirective($directive, $value);
         }
+        $headers->addHeader($cacheControl);
     }
 
     /**

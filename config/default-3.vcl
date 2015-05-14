@@ -48,7 +48,7 @@ sub vcl_recv {
     set req.url = regsub(req.url, "^http[s]?://[^/]+", "");
     
     # static files are always cacheable. remove SSL flag and cookie
-    if (req.url ~ "^/(css|img|js)/.*\.(png|jpg|jpeg|gif|css|js|swf|ico)$") {
+    if (req.url ~ "\.(css|js|jpg|png|gif|tiff|bmp|gz|tgz|bz2|tbz|mp3|ogg|svg|swf|woff)(\?|$)") {
         unset req.http.Https;
         unset req.http.Cookie;
     }
