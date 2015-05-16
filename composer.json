@@ -1,6 +1,7 @@
 {
     "name": "hummer2k/convarnish",
     "description": "ZF2 varnish integration using ConLayout for ESI blocks.",
+    "license": "MIT",
     "keywords": [
         "zf2",
         "cache",
