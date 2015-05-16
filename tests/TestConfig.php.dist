@@ -1,0 +1,14 @@
+<?php
+return [
+    'modules' => [
+        'ConLayout',
+        'ConVarnish'
+    ],
+    'module_listener_options' => [
+        'config_glob_paths' => [
+        ],
+        'module_paths' => [
+            dirname(dirname(__DIR__))
+        ]
+    ]
+];

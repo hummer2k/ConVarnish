@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="./tests/Bootstrap.php" colors="true" verbose="true">
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+    <testsuites>
+        <testsuite name="con-varnish-test">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

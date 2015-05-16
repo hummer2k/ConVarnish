@@ -121,7 +121,7 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
         $cacheControl = new CacheControl();
         $directives = [
             'no-store' => true,
-            'no-chace' => true,
+            'no-cache' => true,
             'must-revalidate' => true,
             'post-check' => 0,
             'pre-check' => 0,

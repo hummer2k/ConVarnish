@@ -34,7 +34,7 @@ return [
              *      'ttl' => 60
              *  ]
              *
-             *  cache all routes that start with application for 120 seconds
+             *  cache all routes that start with application* for 120 seconds
              *  'application*' => 120
              */
         ]
