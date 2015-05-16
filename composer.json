@@ -1,0 +1,34 @@
+{
+    "name": "hummer2k/convarnish",
+    "description": "ZF2 varnish integration using ConLayout for ESI blocks.",
+    "license": "MIT",
+    "keywords": [
+        "zf2",
+        "cache",
+        "varnish",
+        "esi"
+    ],
+    "authors": [
+        {
+          "name": "Cornelius Adams",
+          "email": "cornelius.adams@conlabz.de",
+          "homepage": "http://www.conlabz.de/"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "zendframework/zendframework": "2.*",
+        "hummer2k/conlayout": "~1.1"
+    },
+    "require-dev": {
+        "zendframework/zend-developer-tools": "dev-master",
+        "phpunit/phpunit": "4.5.0",
+        "squizlabs/php_codesniffer": "1.4.*",
+        "satooshi/php-coveralls": "~0.6"
+    },
+    "autoload": {
+        "psr-0": {
+            "ConVarnish\\": "src/"
+        }
+    }
+}

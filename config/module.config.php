@@ -1,30 +1,38 @@
 <?php
-return array(
-    'view_manager' => array(
-        'template_path_stack' => array(
+return [
+    'view_manager' => [
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ),
-    'controllers' => array(
-        'invokables' => array(
+        ],
+    ],
+    'view_helpers' => [
+        'factories' => [
+            'ConVarnish\View\Helper\EsiUrl' => 'ConVarnish\View\Helper\EsiUrlFactory'
+        ],
+        'aliases' => [
+            'esiUrl' => 'ConVarnish\View\Helper\EsiUrl'
+        ]
+    ],
+    'controllers' => [
+        'invokables' => [
             'ConVarnish\Controller\Esi' => 'ConVarnish\Controller\EsiController'
-        )
-    ),
-    'router' => array(
-        'routes' => array(
-            'esi' => array(
+        ]
+    ],
+    'router' => [
+        'routes' => [
+            'esi' => [
                 'type' => 'Segment',
-                'options' => array(
+                'options' => [
                     'route' => '/esi/:block',
-                    'constraints' => array(
+                    'constraints' => [
                         'block' => '[A-Za-z0-9.-_]+'
-                    ),
-                    'defaults' => array(
+                    ],
+                    'defaults' => [
                         'controller' => 'ConVarnish\Controller\Esi',
                         'action' => 'block'
-                    )
-                )
-            )
-        )
-    ),
-);
+                    ]
+                ]
+            ]
+        ]
+    ]
+];

@@ -1,43 +1,41 @@
 <?php
 namespace ConVarnish\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Http\Header\CacheControl;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
-class EsiController
-    extends AbstractActionController
+class EsiController extends AbstractActionController
 {
     /**
      * return single block for esi processing
-     * 
+     *
      * @return ViewModel
      */
     public function blockAction()
     {
-        $blockName = $this->params()->fromRoute('block');
-        if (!$blockName) {
-            return $this->blockNotFound($blockName);
+        $blockId = $this->params()->fromRoute('block');
+        $handles = $this->params()->fromQuery('handles', []);
+        if (!$blockId) {
+            return $this->blockNotFound($blockId);
         }
-       
-        /* @var $blockManager \ConLayout\Controller\Plugin\BlockManager */
-        $blockManager = $this->blockManager();         
-        /* @var $block ViewModel */
-        $block = $blockManager->getBlock($blockName);
-
-        if (!$block instanceof ViewModel) {
-            $block = $this->blockNotFound($blockName);
+        $this->layoutManager()
+            ->setHandles($handles)
+            ->load();
+        if (!$block = $this->layoutManager()->getBlock($blockId)) {
+            $block = $this->blockNotFound($blockId);
         }
         $block->setTerminal(true);
-        
+        $block->setVariable('esi', 'ESI');
         return $block;
     }
-    
+
     /**
-     * 
+     *
      * @param string $blockName
      * @return ViewModel
      */
@@ -46,7 +44,7 @@ class EsiController
         $viewModel = new ViewModel(array(
             'blockName' => $blockName
         ));
-        $viewModel->setTemplate('block-not-found');
+        $viewModel->setTemplate('con-varnish/block-not-found');
         return $viewModel;
     }
 }

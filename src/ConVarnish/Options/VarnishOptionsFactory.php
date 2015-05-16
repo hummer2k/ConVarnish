@@ -8,11 +8,10 @@ use Zend\ServiceManager\FactoryInterface,
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
-class VarnishOptionsFactory
-    implements FactoryInterface
+class VarnishOptionsFactory implements FactoryInterface
 {
     /**
-     * 
+     *
      * @param ServiceLocatorInterface $serviceLocator
      * @return VarnishOptions
      */

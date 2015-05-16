@@ -1,63 +1,64 @@
 <?php
 namespace ConVarnish;
 
-use Zend\Mvc\Application,
-    Zend\Mvc\MvcEvent,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Application;
+use Zend\Mvc\MvcEvent;
 
 class Module
 {
     /**
      * retrieve module config
-     * 
+     *
      * @return array
      */
     public function getConfig()
     {
         return include __DIR__ . '/../../config/module.config.php';
     }
-    
+
     /**
-     * 
+     *
      * @return array
      */
     public function getServiceConfig()
     {
         return include __DIR__ . '/../../config/service.config.php';
     }
-    
+
+    /**
+     *
+     * @param MvcEvent $e
+     */
     public function onBootstrap(MvcEvent $e)
     {
         /* @var $application Application */
         $application = $e->getApplication();
         $serviceManager = $application->getServiceManager();
         $eventManager = $application->getEventManager();
-        $sharedEvents = $eventManager->getSharedManager();
-        
-        $eventManager->attach($serviceManager->get('ConVarnish\Listener\RouteListener'));
-                
-        $sharedEvents->attach('ConLayout\View\Renderer\BlockRenderer', 'render.pre', function($e) {
-            /* @var $viewModel ViewModel */
-            $viewModel = $e->getParam('viewModel');
-            if ($viewModel instanceof ViewModel && null !== $viewModel->getOption('esi')) {
-                $viewModel->setTemplate('esi');
-            }
-        });
+
+        $listeners = [
+            'ConVarnish\Listener\InjectCacheHeaderListener',
+            'ConVarnish\Listener\InjectTagsHeaderListener'
+        ];
+
+        foreach ($listeners as $listener) {
+            $eventManager->attach($serviceManager->get($listener));
+        }
     }
 
     /**
      * retrieve autoloader config
-     * 
+     *
      * @return array
      */
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/../'. __NAMESPACE__,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }
