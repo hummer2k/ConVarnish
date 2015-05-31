@@ -2,7 +2,8 @@
 
 namespace ConVarnish\Service;
 
-use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Client;
+use Zend\Http\Response;
 
 /**
  * @package
@@ -22,6 +23,12 @@ class VarnishService
 
     /**
      *
+     * @var Client
+     */
+    protected $client;
+
+    /**
+     *
      * @param array $servers
      */
     public function __construct(array $servers)
@@ -30,76 +37,55 @@ class VarnishService
     }
 
     /**
-     * discard url from varnish cache
-     *
-     * @param string $hostname
-     * @return mixed curlinfo or false if error
-     */
-    public function purge($hostname, $purgeUrl = '/', $debug = false)
-    {
-        return $this->ban($hostname, $this->normalizePurgeUrl($purgeUrl), self::VARNISH_HEADER_URL, $debug);
-    }
-
-    /**
-     * clean
-     *
-     * @param string $hostname
-     * @param boolean $debug
-     * @return array curl responses
-     */
-    public function clean($hostname, $debug = false)
-    {
-        return $this->ban($hostname, '.*', self::VARNISH_HEADER_URL, $debug);
-    }
-
-    /**
      * main method to add bans to varnish's ban list
      *
      * @param string $hostname
      * @param string $pattern PCRE pattern
      * @param string $type purge type header e.g. X-Purge-URL or X-Purge-Tags
-     * @param boolean $debug show debug info
-     * @return array curl responses
+     * @return Response[]
      */
-    public function ban($hostname, $pattern = '.*', $type = self::VARNISH_HEADER_TAGS, $debug = false)
+    public function purge($hostname, $pattern = '.*', $type = self::VARNISH_HEADER_URL)
     {
         $info = array();
         foreach ($this->servers as $serverName => $server) {
-            $finalUrl = $this->prepareFinalUrl($server);
-            $curlOptionList = $this->getCurlOptions(array(
-                CURLOPT_URL => $finalUrl,
-                CURLOPT_HTTPHEADER => array(
-                    self::VARNISH_HEADER_HOST . ': ' . '^('.str_replace('.', '.', $hostname).')$',
-                    $type . ': ' . (empty($pattern) ? '.*' : $pattern)
-                )
-            ));
-
-            $fd = false;
-            if ($debug == true) {
-                print "\n---- Curl debug -----\n";
-                $fd = fopen("php://output", 'w+');
-                $curlOptionList[CURLOPT_VERBOSE] = true;
-                $curlOptionList[CURLOPT_STDERR] = $fd;
-            }
-
-            $curlHandler = curl_init();
-            curl_setopt_array($curlHandler, $curlOptionList);
-
-            curl_exec($curlHandler);
-            $error = curl_error($curlHandler);
-            if (!$error) {
-                $info[$serverName] = curl_getinfo($curlHandler);
-                $info[$serverName]['success'] = true;
-            } else {
-                $info[$serverName]['error'] = $error;
-                $info[$serverName]['success'] = false;
-            }
-            curl_close($curlHandler);
-            if ($fd !== false) {
-                fclose($fd);
-            }
+            $uri = $this->prepareUri($server);
+            $client = $this->getClient();
+            $client->setUri($uri);
+            $client->getRequest()->setAllowCustomMethods(true);
+            $client->setMethod('PURGE');
+            $client->setHeaders([
+                self::VARNISH_HEADER_HOST => '^('.$hostname.')$',
+                $type => $pattern,
+            ]);
+            $info[$serverName] = $client->send();
         }
         return $info;
+    }
+
+    /**
+     *
+     * @param string $hostname
+     * @param string $uri
+     * @return Response[]
+     */
+    public function purgeUri($hostname, $uri)
+    {
+        $pattern = '^' . $uri . '$';
+        return $this->purge($hostname, $pattern, self::VARNISH_HEADER_URL);
+    }
+
+    /**
+     *
+     * @param string $hostname
+     * @param string|array $tags
+     * @return Response[]
+     */
+    public function purgeTags($hostname, $tags)
+    {
+        if (is_array($tags)) {
+            $tags = implode(',', $tags);
+        }
+        return $this->purge($hostname, $tags, self::VARNISH_HEADER_TAGS);
     }
 
     /**
@@ -114,12 +100,12 @@ class VarnishService
     }
 
     /**
-     * retrieve varnish url for purge/ban, eg. http://127.0.0.1:80/
+     * retrieve varnish url for purge eg. http://127.0.0.1:80/
      *
      * @param array $server
      * @return string
      */
-    protected function prepareFinalUrl(array $server)
+    private function prepareUri(array $server)
     {
         $finalUrl = sprintf(
             'http://%s:%d%s',
@@ -131,33 +117,25 @@ class VarnishService
     }
 
     /**
-     * retrieve default curl options
      *
-     * @return array
+     * @return Client
      */
-    protected function getCurlDefaultOptions()
+    public function getClient()
     {
-         $curlOptionList = array(
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CUSTOMREQUEST => 'PURGE',
-            CURLOPT_HEADER => true,
-            CURLOPT_NOBODY => true,
-            CURLOPT_CONNECTTIMEOUT_MS => 2000
-        );
-        return $curlOptionList;
+        if (null === $this->client) {
+            $this->client = new Client();
+        }
+        return $this->client;
     }
 
     /**
-     * retrieve options merged with default options
      *
-     * @param array $options
-     * @return array
+     * @param Client $client
+     * @return VarnishService
      */
-    protected function getCurlOptions(array $options = array())
+    public function setClient(Client $client)
     {
-        return ArrayUtils::merge(
-            $this->getCurlDefaultOptions(),
-            $options
-        );
+        $this->client = $client;
+        return $this;
     }
 }

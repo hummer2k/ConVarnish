@@ -1,11 +1,10 @@
 <?php
-use ConVarnish\Listener\InjectCacheHeaderListener;
 return [
     'varnish' => [
         /**
          * enable caching
          */
-        'cache_enabled' => false,
+        'cache_enabled' => true,
         /**
          * enable esi processing
          */
@@ -23,7 +22,7 @@ return [
          */
         'servers' => [
             'default' => [
-                'host' => 127.0.0.1,
+                'ip' => '127.0.0.1',
                 'port' => 80
             ]
         ],
@@ -31,7 +30,7 @@ return [
          * list of uncacheable routes
          */
         'uncacheable_routes' => [
-            //'application*',
+            'application*',
             //'home'
         ],
         'cacheable_routes' => [
