@@ -70,7 +70,7 @@ class VarnishService
      */
     public function purgeUri($hostname, $uri)
     {
-        $pattern = '^' . $uri . '$';
+        $pattern = $this->normalizePurgeUrl($uri);
         return $this->purge($hostname, $pattern, self::VARNISH_HEADER_URL);
     }
 
@@ -126,16 +126,5 @@ class VarnishService
             $this->client = new Client();
         }
         return $this->client;
-    }
-
-    /**
-     *
-     * @param Client $client
-     * @return VarnishService
-     */
-    public function setClient(Client $client)
-    {
-        $this->client = $client;
-        return $this;
     }
 }

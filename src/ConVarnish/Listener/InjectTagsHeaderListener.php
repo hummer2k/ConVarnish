@@ -17,6 +17,8 @@ use Zend\View\Model\ViewModel;
  */
 class InjectTagsHeaderListener implements ListenerAggregateInterface
 {
+    const OPTION_CACHE_TAGS = 'cache_tags';
+
     use ListenerAggregateTrait;
 
     /**
@@ -47,12 +49,12 @@ class InjectTagsHeaderListener implements ListenerAggregateInterface
         /* @var $layout ViewModel */
         $layout = $e->getViewModel();
         $this->extractCacheTags($layout);
-        $cacheTags = array_filter(array_unique($this->cacheTags));
+        $cacheTags = $this->getCacheTags();
         if (!empty($cacheTags)) {
             $headers = $e->getResponse()->getHeaders();
             $tagsHeader = new GenericHeader(
                 VarnishService::VARNISH_HEADER_TAGS,
-                implode(',', $this->cacheTags)
+                implode(',', $cacheTags)
             );
             $headers->addHeader($tagsHeader);
         }
@@ -67,12 +69,21 @@ class InjectTagsHeaderListener implements ListenerAggregateInterface
         if ($viewModel->getOption('esi') && !$viewModel->terminate()) {
             return;
         }
-        $tags = (array) $viewModel->getOption('cache_tags', []);
+        $tags = (array) $viewModel->getOption(self::OPTION_CACHE_TAGS, []);
         $this->cacheTags = ArrayUtils::merge($this->cacheTags, $tags);
         if ($viewModel->hasChildren()) {
             foreach ($viewModel->getChildren() as $childViewModel) {
                 $this->extractCacheTags($childViewModel);
             }
         }
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getCacheTags()
+    {
+        return array_filter(array_unique($this->cacheTags));
     }
 }
