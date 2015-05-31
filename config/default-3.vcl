@@ -3,7 +3,7 @@ backend default {
   .port = "8080";
 }
 
-acl purge {
+acl ban {
     "localhost";
     "127.0.0.1";
 }
@@ -17,34 +17,34 @@ sub vcl_recv {
         }
     }
     
-    # Purge
-    if (req.method == "PURGE") {
-        if (client.ip !~ purge) {
+    # Ban
+    if (req.method == "BAN") {
+        if (client.ip !~ ban) {
             return error 405, "Method not allowed";
         }
-        if (!req.http.X-Purge-Host) {
-            return error 400, "Please specify X-Purge-Host header";
+        if (!req.http.X-Ban-Host) {
+            return error 400, "Please specify X-Ban-Host header";
         }
-        if (req.http.X-Purge-Tags) {            
-            ban("obj.http.X-Purge-Tags ~ " + req.http.X-Purge-Tags + " && obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host);
-            return error 200, "Purged by Tags: " + req.http.X-Purge-Tags + ", Host: " + req.http.X-Purge-Host;
-        } elsif (req.http.X-Purge-URL) {
-            ban("obj.http.X-Purge-URL ~ " + req.http.X-Purge-URL + " && obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host);
-            return error 200, "Purged by URL: " + req.http.X-Purge-URL + ", Host: " + req.http.X-Purge-Host;
+        if (req.http.X-Ban-Tags) {            
+            ban("obj.http.X-Ban-Tags ~ " + req.http.X-Ban-Tags + " && obj.http.X-Ban-Host ~ " + req.http.X-Ban-Host);
+            return error 200, "Banned by Tags: " + req.http.X-Ban-Tags + ", Host: " + req.http.X-Ban-Host;
+        } elsif (req.http.X-Ban-URL) {
+            ban("obj.http.X-Ban-URL ~ " + req.http.X-Ban-URL + " && obj.http.X-Ban-Host ~ " + req.http.X-Ban-Host);
+            return error 200, "Banned by URL: " + req.http.X-Ban-URL + ", Host: " + req.http.X-Ban-Host;
         }
-        return error 400, "Please specify X-Purge-URL or X-Purge-Tags headers";
+        return error 400, "Please specify X-Ban-URL or X-Ban-Tags headers";
     }    
     
     set req.http.Surrogate-Capability = "varnish=ESI/1.0";
     
     if (req.request != "GET" &&
-      req.request != "HEAD" &&
-      req.request != "PUT" &&
-      req.request != "POST" &&
-      req.request != "TRACE" &&
-      req.request != "OPTIONS" &&
-      req.request != "DELETE" &&
-      req.request != "PURGE") {
+        req.request != "HEAD" &&
+        req.request != "PUT" &&
+        req.request != "POST" &&
+        req.request != "TRACE" &&
+        req.request != "OPTIONS" &&
+        req.request != "DELETE"
+    ) {
         /* Non-RFC2616 or CONNECT which is weird. */
         return (pipe);
     }
@@ -100,8 +100,8 @@ sub vcl_fetch {
     }
 
     # add ban-lurker tags to object
-    set beresp.http.X-Purge-URL = req.url;
-    set beresp.http.X-Purge-Host = req.http.host;
+    set beresp.http.X-Ban-URL = req.url;
+    set beresp.http.X-Ban-Host = req.http.host;
     
     if (
         beresp.status == 200 || 
@@ -144,8 +144,8 @@ sub vcl_deliver {
         remove resp.http.X-Varnish;
         remove resp.http.Via;
         remove resp.http.Age;
-        remove resp.http.X-Purge-URL;
-        remove resp.http.X-Purge-Host;
+        remove resp.http.X-Ban-URL;
+        remove resp.http.X-Ban-Host;
     }
     
     if (resp.http.magicmarker) {

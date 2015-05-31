@@ -11,9 +11,9 @@ use Zend\Http\Response;
  */
 class VarnishService
 {
-    const VARNISH_HEADER_HOST = 'X-Purge-Host';
-    const VARNISH_HEADER_URL  = 'X-Purge-URL';
-    const VARNISH_HEADER_TAGS = 'X-Purge-Tags';
+    const VARNISH_HEADER_HOST = 'X-Ban-Host';
+    const VARNISH_HEADER_URL  = 'X-Ban-URL';
+    const VARNISH_HEADER_TAGS = 'X-Ban-Tags';
 
     /**
      *
@@ -41,10 +41,10 @@ class VarnishService
      *
      * @param string $hostname
      * @param string $pattern PCRE pattern
-     * @param string $type purge type header e.g. X-Purge-URL or X-Purge-Tags
+     * @param string $type ban type header e.g. X-Ban-URL or X-Ban-Tags
      * @return Response[]
      */
-    public function purge($hostname, $pattern = '.*', $type = self::VARNISH_HEADER_URL)
+    public function ban($hostname, $pattern = '.*', $type = self::VARNISH_HEADER_URL)
     {
         $info = array();
         foreach ($this->servers as $serverName => $server) {
@@ -52,7 +52,7 @@ class VarnishService
             $client = $this->getClient();
             $client->setUri($uri);
             $client->getRequest()->setAllowCustomMethods(true);
-            $client->setMethod('PURGE');
+            $client->setMethod('BAN');
             $client->setHeaders([
                 self::VARNISH_HEADER_HOST => '^('.$hostname.')$',
                 $type => $pattern,
@@ -68,10 +68,10 @@ class VarnishService
      * @param string $uri
      * @return Response[]
      */
-    public function purgeUri($hostname, $uri)
+    public function banUri($hostname, $uri)
     {
-        $pattern = $this->normalizePurgeUrl($uri);
-        return $this->purge($hostname, $pattern, self::VARNISH_HEADER_URL);
+        $pattern = $this->normalizeBanUrl($uri);
+        return $this->ban($hostname, $pattern, self::VARNISH_HEADER_URL);
     }
 
     /**
@@ -80,27 +80,27 @@ class VarnishService
      * @param string|array $tags
      * @return Response[]
      */
-    public function purgeTags($hostname, $tags)
+    public function banTags($hostname, $tags)
     {
         if (is_array($tags)) {
             $tags = implode(',', $tags);
         }
-        return $this->purge($hostname, $tags, self::VARNISH_HEADER_TAGS);
+        return $this->ban($hostname, $tags, self::VARNISH_HEADER_TAGS);
     }
 
     /**
      * normalize regex
      *
-     * @param string $purgeUrl
+     * @param string $banUrl
      * @return string
      */
-    protected function normalizePurgeUrl($purgeUrl)
+    protected function normalizeBanUrl($banUrl)
     {
-        return '^/' . ltrim($purgeUrl, '/') . '$';
+        return '^/' . ltrim($banUrl, '/') . '$';
     }
 
     /**
-     * retrieve varnish url for purge eg. http://127.0.0.1:80/
+     * retrieve varnish url for ban eg. http://127.0.0.1:80/
      *
      * @param array $server
      * @return string

@@ -7,28 +7,28 @@ backend default {
     .port = "8080";
 }
 
-acl purge {
-   # "localhost";
-   # "127.0.0.1";
+acl ban {
+    "localhost";
+    "127.0.0.1";
 }
 
 sub vcl_recv {
-    # Purge
-    if (req.method == "PURGE") {
-        if (client.ip !~ purge) {
+    # Ban
+    if (req.method == "BAN") {
+        if (client.ip !~ ban) {
             return (synth(405, "Method not allowed"));
         }
-        if (!req.http.X-Purge-Host) {
-            return (synth(400, "Please specify X-Purge-Host header"));
+        if (!req.http.X-Ban-Host) {
+            return (synth(400, "Please specify X-Ban-Host header"));
         }
-        if (req.http.X-Purge-Tags) {            
-            ban("obj.http.X-Purge-Tags ~ " + req.http.X-Purge-Tags + " && obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host);
-            return (synth(200, "Purged by Tags: " + req.http.X-Purge-Tags + ", Host: " + req.http.X-Purge-Host));
-        } elsif (req.http.X-Purge-URL) {
-            ban("obj.http.X-Purge-URL ~ " + req.http.X-Purge-URL + " && obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host);
-            return (synth(200, "Purged by URL: " + req.http.X-Purge-URL + ", Host: " + req.http.X-Purge-Host));
+        if (req.http.X-Ban-Tags) {            
+            ban("obj.http.X-Ban-Tags ~ " + req.http.X-Ban-Tags + " && obj.http.X-Ban-Host ~ " + req.http.X-Ban-Host);
+            return (synth(200, "Banned by Tags: " + req.http.X-Ban-Tags + ", Host: " + req.http.X-Ban-Host));
+        } elsif (req.http.X-Ban-URL) {
+            ban("obj.http.X-Ban-URL ~ " + req.http.X-Ban-URL + " && obj.http.X-Ban-Host ~ " + req.http.X-Ban-Host);
+            return (synth(200, "Banned by URL: " + req.http.X-Ban-URL + ", Host: " + req.http.X-Ban-Host));
         }
-        return (synth(400, "Please specify X-Purge-URL or X-Purge-Tags headers"));
+        return (synth(400, "Please specify X-Ban-URL or X-Ban-Tags headers"));
     }
 
     if (
@@ -81,8 +81,8 @@ sub vcl_backend_response {
         set beresp.do_esi = true;
     }
 
-    set beresp.http.X-Purge-URL = bereq.url;
-    set beresp.http.X-Purge-Host = bereq.http.host;
+    set beresp.http.X-Ban-URL = bereq.url;
+    set beresp.http.X-Ban-Host = bereq.http.host;
 
     if (beresp.http.X-Cache-Debug) {
         set beresp.http.X-Cache-Control = beresp.http.Cache-Control;
@@ -129,9 +129,9 @@ sub vcl_deliver {
     } else {
         unset resp.http.Age;
         unset resp.http.X-Cache-Debug;
-        unset resp.http.X-Purge-Tags;        
-        unset resp.http.X-Purge-Host;
-        unset resp.http.X-Purge-URL;
+        unset resp.http.X-Ban-Tags;        
+        unset resp.http.X-Ban-Host;
+        unset resp.http.X-Ban-URL;
         unset resp.http.X-Powered-By;
         unset resp.http.Server;
         unset resp.http.X-Varnish;

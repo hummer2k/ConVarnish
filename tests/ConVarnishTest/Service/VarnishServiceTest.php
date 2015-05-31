@@ -31,27 +31,27 @@ class VarnishServiceTest extends AbstractTest
         $this->service->getClient()->setAdapter($this->adapter);
     }
 
-    public function testPurge()
+    public function testBan()
     {
-        $result = $this->service->purge('example.com');
+        $result = $this->service->ban('example.com');
         $this->assertContainsOnlyInstancesOf('Zend\Http\Response', $result);
     }
 
-    public function testPurgeUri()
+    public function testBanUri()
     {
-        $result = $this->service->purgeUri('example.com', '/');
+        $result = $this->service->banUri('example.com', '/');
         $this->assertContainsOnlyInstancesOf('Zend\Http\Response', $result);
     }
 
-    public function testPurgeTags()
+    public function testBanTags()
     {
-        $result = $this->service->purgeTags('example.com', 'tag1,tag2,tag3');
+        $result = $this->service->banTags('example.com', 'tag1,tag2,tag3');
         $this->assertContainsOnlyInstancesOf('Zend\Http\Response', $result);
     }
 
-    public function testPurgeTagsArray()
+    public function testBanTagsArray()
     {
-        $result = $this->service->purgeTags('example.com', ['tag1', 'tag2', 'tag3']);
+        $result = $this->service->banTags('example.com', ['tag1', 'tag2', 'tag3']);
         $this->assertContainsOnlyInstancesOf('Zend\Http\Response', $result);
     }
 }
