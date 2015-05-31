@@ -1,8 +1,8 @@
 <?php
 use ConLayout\Layout\LayoutInterface;
-$blockId = LayoutInterface::BLOCK_ID_VAR
+$blockId = LayoutInterface::BLOCK_ID_VAR;
 ?>
 <esi:include src="<?= $this->esiUrl($this->{$blockId}) ?>"/>
 <esi:remove>
-  ESI disabled
+    <?= $this->content ?>
 </esi:remove>

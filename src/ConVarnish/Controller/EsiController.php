@@ -1,7 +1,6 @@
 <?php
 namespace ConVarnish\Controller;
 
-use Zend\Http\Header\CacheControl;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -19,18 +18,15 @@ class EsiController extends AbstractActionController
     public function blockAction()
     {
         $blockId = $this->params()->fromRoute('block');
-        $handles = $this->params()->fromQuery('handles', []);
         if (!$blockId) {
             return $this->blockNotFound($blockId);
         }
-        $this->layoutManager()
-            ->setHandles($handles)
-            ->load();
+        $this->layoutManager()->load();
         if (!$block = $this->layoutManager()->getBlock($blockId)) {
             $block = $this->blockNotFound($blockId);
         }
+        $block->setVariable('__ESI__', true);
         $block->setTerminal(true);
-        $block->setVariable('esi', 'ESI');
         return $block;
     }
 

@@ -18,6 +18,9 @@ use Zend\View\Model\ViewModel;
  */
 class InjectCacheHeaderListener implements ListenerAggregateInterface
 {
+    const HEADER_CACHE_DEBUG = 'X-Cache-Debug';
+    const ESI_TEMPLATE = 'con-varnish/esi';
+
     use ListenerAggregateTrait;
 
     /**
@@ -71,8 +74,7 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
             [$this, 'injectCacheHeader'],
             -10
         );
-        if (
-            $this->varnishOptions->isCacheEnabled() &&
+        if ($this->varnishOptions->isCacheEnabled() &&
             $this->varnishOptions->useEsi()
         ) {
             $events->attach(MvcEvent::EVENT_DISPATCH, [$this, 'determineEsiProcessing'], -15);
@@ -92,32 +94,30 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
     {
         $routeMatch = $e->getRouteMatch();
         $routeName = $routeMatch->getMatchedRouteName();
-        $cacheOptions = $this->getCacheOptions($routeName);
+
+        if (!$this->canCacheRoute($routeName)) {
+            $ttl = 0;
+        } else {
+            $ttl = $this->getTtlForRoute($routeName);
+        }
+
         $headers = $e->getResponse()->getHeaders();
 
         if ($this->varnishOptions->getDebug()) {
-            $debug = new GenericHeader('X-Cache-Debug', '1');
+            $debug = new GenericHeader(self::HEADER_CACHE_DEBUG, '1');
             $headers->addHeader($debug);
         }
 
-        if (false !== $cacheOptions) {
-            if (is_array($cacheOptions) && isset($cacheOptions['ttl'])) {
-                $this->ttl = (int) $cacheOptions['ttl'];
-            } elseif (is_int($cacheOptions)) {
-                $this->ttl = $cacheOptions;
-            } else {
-                $this->ttl = $this->varnishOptions->getDefaultTtl();
-            }
-        } else {
-            $viewModel = $e->getViewModel();
-            $esiOptions = (array) $viewModel->getOption('esi', []);
-            if (isset($esiOptions['ttl'])) {
-                $this->ttl = (int) $esiOptions['ttl'];
-            }
+        $viewModel = $e->getViewModel();
+        $esiOptions = (array) $viewModel->getOption('esi', []);
+        if (isset($esiOptions['ttl'])) {
+            $ttl = (int) $esiOptions['ttl'];
         }
+
         if (!$this->varnishOptions->isCacheEnabled()) {
-            $this->ttl = 0;
+            $ttl = 0;
         }
+
         $cacheControl = new CacheControl();
         $directives = [
             'no-store' => true,
@@ -125,29 +125,46 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
             'must-revalidate' => true,
             'post-check' => 0,
             'pre-check' => 0,
-            's-maxage' => $this->ttl,
+            's-maxage' => $ttl,
         ];
         foreach ($directives as $directive => $value) {
             $cacheControl->addDirective($directive, $value);
         }
         $headers->addHeader($cacheControl);
+
+        $this->ttl = $ttl;
     }
 
     /**
      *
-     *
      * @param string $routeName
-     * @return array|false array options or false if nothing found
+     * @return int
      */
-    private function getCacheOptions($routeName)
+    private function getTtlForRoute($routeName)
     {
         $cacheableRoutes = $this->varnishOptions->getCacheableRoutes();
-        foreach ($cacheableRoutes as $pattern => $cacheableRoute) {
+        foreach ($cacheableRoutes as $pattern => $ttl) {
             if (fnmatch($pattern, $routeName)) {
-                return $cacheableRoute;
+                return (int) $ttl;
             }
         }
-        return false;
+        return $this->varnishOptions->getDefaultTtl();
+    }
+
+    /**
+     *
+     * @param string $routeName
+     * @return boolean
+     */
+    private function canCacheRoute($routeName)
+    {
+        $uncacheableRoutes = $this->varnishOptions->getUncacheableRoutes();
+        foreach ($uncacheableRoutes as $pattern) {
+            if (fnmatch($pattern, $routeName)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -158,8 +175,7 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
     {
         $requestHeaders = $e->getRequest()->getHeaders();
         $this->responseHeaders = $e->getResponse()->getHeaders();
-        if (
-            ($this->ttl > 0) &&
+        if (($this->ttl > 0) &&
             $requestHeaders->has('Surrogate-Capability') &&
             false !== strpos($requestHeaders->get('Surrogate-Capability')->getFieldValue(), 'ESI/1.0') &&
             $e->getRouteMatch()->getMatchedRouteName() !== 'esi'
@@ -180,7 +196,7 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
         /* @var $block ViewModel */
         $block = $e->getParam('block');
         if ($block->getOption('esi')) {
-            $block->setTemplate('con-varnish/esi');
+            $block->setTemplate(self::ESI_TEMPLATE);
             $this->injectEsiHeader();
         }
     }
@@ -200,8 +216,39 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
      *
      * @return bool
      */
-    private function canUseEsi()
+    public function canUseEsi()
     {
         return (bool) $this->canUseEsi;
+    }
+
+    /**
+     *
+     * @param bool $canUseEsi
+     * @return InjectCacheHeaderListener
+     */
+    public function setCanUseEsi($canUseEsi)
+    {
+        $this->canUseEsi = $canUseEsi;
+        return $this;
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getTtl()
+    {
+        return $this->ttl;
+    }
+
+    /**
+     *
+     * @param int $ttl
+     * @return InjectCacheHeaderListener
+     */
+    public function setTtl($ttl)
+    {
+        $this->ttl = (int) $ttl;
+        return $this;
     }
 }

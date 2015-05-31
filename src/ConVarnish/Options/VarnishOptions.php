@@ -29,6 +29,12 @@ class VarnishOptions extends AbstractOptions
 
     /**
      *
+     * @var array
+     */
+    protected $uncacheableRoutes = [];
+
+    /**
+     *
      * @var boolean
      */
     protected $debug = false;
@@ -136,6 +142,17 @@ class VarnishOptions extends AbstractOptions
     public function setUseEsi($useEsi)
     {
         $this->useEsi = $useEsi;
+        return $this;
+    }
+    
+    public function getUncacheableRoutes()
+    {
+        return $this->uncacheableRoutes;
+    }
+
+    public function setUncacheableRoutes(array $uncacheableRoutes)
+    {
+        $this->uncacheableRoutes = $uncacheableRoutes;
         return $this;
     }
 }

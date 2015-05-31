@@ -11,12 +11,30 @@ acl purge {
 sub vcl_recv {
     if (req.restarts == 0) {
         if (req.http.x-forwarded-for) {
-            set req.http.X-Forwarded-For =
-            req.http.X-Forwarded-For + ", " + client.ip;
+            set req.http.X-Forwarded-For = req.http.X-Forwarded-For + ", " + client.ip;
         } else {
             set req.http.X-Forwarded-For = client.ip;
         }
     }
+    
+    # Purge
+    if (req.method == "PURGE") {
+        if (client.ip !~ purge) {
+            return error 405, "Method not allowed";
+        }
+        if (!req.http.X-Purge-Host) {
+            return error 400, "Please specify X-Purge-Host header";
+        }
+        if (req.http.X-Purge-Tags) {            
+            ban("obj.http.X-Purge-Tags ~ " + req.http.X-Purge-Tags + " && obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host);
+            return error 200, "Purged by Tags: " + req.http.X-Purge-Tags + ", Host: " + req.http.X-Purge-Host;
+        } elsif (req.http.X-Purge-URL) {
+            ban("obj.http.X-Purge-URL ~ " + req.http.X-Purge-URL + " && obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host);
+            return error 200, "Purged by URL: " + req.http.X-Purge-URL + ", Host: " + req.http.X-Purge-Host;
+        }
+        return error 400, "Please specify X-Purge-URL or X-Purge-Tags headers";
+    }    
+    
     set req.http.Surrogate-Capability = "varnish=ESI/1.0";
     
     if (req.request != "GET" &&
@@ -31,14 +49,6 @@ sub vcl_recv {
         return (pipe);
     }
     
-    if (req.request == "PURGE") {
-        if (!client.ip ~ purge) {
-            error 405 "Not allowed.";
-        }
-        ban("obj.http.X-Purge-Host ~ " + req.http.X-Purge-Host + " && obj.http.X-Purge-URL ~ " + req.http.X-Purge-Regex + " && obj.http.Content-Type ~ " + req.http.X-Purge-Content-Type);
-        return (lookup);
-    }
-
     # we only deal with GET and HEAD by default    
     if (req.request != "GET" && req.request != "HEAD") {
         return (pass);
@@ -82,32 +92,6 @@ sub vcl_recv {
     return (lookup);
 }
 
-sub vcl_hash {
-    hash_data(req.url);
-    if (req.http.host) {
-        hash_data(req.http.host);
-    } else {
-        hash_data(server.ip);
-    }
-    return (hash);
-}
-
-sub vcl_hit {
-    if (req.request == "PURGE") {
-        purge;
-        error 200 "Purged";
-    }
-    return (deliver);
-}
- 
-sub vcl_miss {
-    if (req.request == "PURGE") {
-        purge;
-        error 404 "Not in cache";
-    }
-    return (fetch);
-}
-
 sub vcl_fetch {
     # Enable esi processing 
     if (beresp.http.Surrogate-Control ~ "ESI/1.0") {
@@ -119,23 +103,27 @@ sub vcl_fetch {
     set beresp.http.X-Purge-URL = req.url;
     set beresp.http.X-Purge-Host = req.http.host;
     
-    if (beresp.status == 200 || beresp.status == 301 || beresp.status == 404) {
-        if (beresp.http.Content-Type ~ "text/html" || beresp.http.Content-Type ~ "text/xml") {
+    if (
+        beresp.status == 200 || 
+        beresp.status == 301 || 
+        beresp.status == 404
+    ) {
+        if (
+            beresp.http.Content-Type ~ "text/html" || 
+            beresp.http.Content-Type ~ "text/xml" ||
+            beresp.http.Content-Type ~ "application/json"
+        ) {
             if (beresp.ttl < 1s) {
                 set beresp.ttl = 0s;
                 return (hit_for_pass);
             }
-            # marker for vcl_deliver to reset Age:
-            set beresp.http.magicmarker = "1";            
-            # Don't cache cookies
+            set beresp.http.magicmarker = "1";
             unset beresp.http.set-cookie;
         } else {
-            # set default TTL value for static content
             set beresp.ttl = 4h;
         }
         return (deliver);
     }
-    
     return (hit_for_pass);
 }
 
@@ -161,9 +149,7 @@ sub vcl_deliver {
     }
     
     if (resp.http.magicmarker) {
-        # Remove the magic marker
         unset resp.http.magicmarker;
-
         set resp.http.Cache-Control = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0";
         set resp.http.Pragma = "no-cache";
         set resp.http.Expires = "Mon, 31 Mar 2008 10:00:00 GMT";

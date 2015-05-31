@@ -13,10 +13,7 @@ class EsiUrlFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $serviceManager = $serviceLocator->getServiceLocator();
-        $handles = new EsiUrl(
-            $serviceManager->get('ConLayout\Updater\LayoutUpdaterInterface')
-        );
-        return $handles;
+        $esiUrl = new EsiUrl();
+        return $esiUrl;
     }
 }

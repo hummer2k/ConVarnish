@@ -122,7 +122,10 @@ class VarnishService
     protected function prepareFinalUrl(array $server)
     {
         $finalUrl = sprintf(
-            'http://%s:%d%s', $server['ip'], $server['port'], '/'
+            'http://%s:%d%s',
+            $server['ip'],
+            $server['port'],
+            '/'
         );
         return $finalUrl;
     }

@@ -1,18 +1,17 @@
 <?php
 namespace ConVarnish\Service;
 
-use Zend\ServiceManager\FactoryInterface,
-    Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
-class VarnishServiceFactory
-    implements FactoryInterface
+class VarnishServiceFactory implements FactoryInterface
 {
     /**
-     * 
+     *
      * @param ServiceLocatorInterface $serviceLocator
      * @return VarnishService
      */

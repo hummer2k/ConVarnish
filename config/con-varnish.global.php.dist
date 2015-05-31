@@ -1,4 +1,5 @@
 <?php
+use ConVarnish\Listener\InjectCacheHeaderListener;
 return [
     'varnish' => [
         /**
@@ -14,6 +15,10 @@ return [
          */
         'default_ttl' => 14400,
         /**
+         * inject x-debug headers
+         */
+        'debug' => false,
+        /**
          * varnish servers
          */
         'servers' => [
@@ -22,20 +27,24 @@ return [
                 'port' => 80
             ]
         ],
+        /**
+         * list of uncacheable routes
+         */
+        'uncacheable_routes' => [
+            //'application*',
+            //'home'
+        ],
         'cacheable_routes' => [
             /**
              * format:
              *
-             * routeName => options
+             * routeName => ttl
              *
-             * e.g.:
-             *   cache route 'home' for 60 seconds
-             *  'home' => [
-             *      'ttl' => 60
-             *  ]
-             *
-             *  cache all routes that start with application* for 120 seconds
+             * cache all routes that start with application* for 120 seconds
              *  'application*' => 120
+             *
+             * cache this route for 1 hour
+             *  'application/default' => 3600
              */
         ]
     ]
