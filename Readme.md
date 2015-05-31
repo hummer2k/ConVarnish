@@ -2,11 +2,9 @@
 
 https://travis-ci.org/hummer2k/ConVarnish.svg?branch=master
 
-## Master
-[![Build Status](https://travis-ci.org/hummer2k/ConVarnish.svg?branch=master)](https://travis-ci.org/hummer2k/ConVarnish)
+Master: [![Build Status](https://travis-ci.org/hummer2k/ConVarnish.svg?branch=master)](https://travis-ci.org/hummer2k/ConVarnish)
 
-## Develop
-[![Build Status](https://travis-ci.org/hummer2k/ConVarnish.svg?branch=develop)](https://travis-ci.org/hummer2k/ConVarnish)
+Develop: [![Build Status](https://travis-ci.org/hummer2k/ConVarnish.svg?branch=develop)](https://travis-ci.org/hummer2k/ConVarnish)
 
 ## Installation
 
