@@ -47,6 +47,11 @@ sub vcl_recv {
     # tell backend support for esi
     set req.http.Surrogate-Capability = "varnish=ESI/1.0";
 
+    # We only deal with GET and HEAD by default
+    if (req.method != "GET" && req.method != "HEAD") {
+        return (pass);
+    }
+
     # normalize url in case of leading HTTP scheme and domain
     set req.url = regsub(req.url, "^http[s]?://[^/]+", "");
     
