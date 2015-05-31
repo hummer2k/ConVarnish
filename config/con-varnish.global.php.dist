@@ -4,7 +4,7 @@ return [
         /**
          * enable caching
          */
-        'cache_enabled' => true,
+        'cache_enabled' => false,
         /**
          * enable esi processing
          */
