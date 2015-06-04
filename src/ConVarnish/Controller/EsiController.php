@@ -1,6 +1,7 @@
 <?php
 namespace ConVarnish\Controller;
 
+use ConLayout\Controller\Plugin\LayoutManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -18,11 +19,17 @@ class EsiController extends AbstractActionController
     public function blockAction()
     {
         $blockId = $this->params()->fromRoute('block');
+        $handles = $this->params()->fromQuery('handles', []);
+        /* @var $layoutManager LayoutManager */
+        $layoutManager = $this->layoutManager();
+        foreach ($handles as $handle) {
+            $layoutManager->addHandle($handle);
+        }
         if (!$blockId) {
             return $this->blockNotFound($blockId);
         }
-        $this->layoutManager()->load();
-        if (!$block = $this->layoutManager()->getBlock($blockId)) {
+        $layoutManager->load();
+        if (!$block = $layoutManager->getBlock($blockId)) {
             $block = $this->blockNotFound($blockId);
         }
         $block->setVariable('__ESI__', true);

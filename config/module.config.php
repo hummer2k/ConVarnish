@@ -14,8 +14,8 @@ return [
         ]
     ],
     'controllers' => [
-        'invokables' => [
-            'ConVarnish\Controller\Esi' => 'ConVarnish\Controller\EsiController'
+        'factories' => [
+            'ConVarnish\Controller\Esi' => 'ConVarnish\Controller\EsiControllerFactory'
         ]
     ],
     'router' => [
@@ -25,7 +25,7 @@ return [
                 'options' => [
                     'route' => '/esi/:block',
                     'constraints' => [
-                        'block' => '[A-Za-z0-9.-_]+'
+                        'block' => '[A-Za-z0-9_.-]+'
                     ],
                     'defaults' => [
                         'controller' => 'ConVarnish\Controller\Esi',

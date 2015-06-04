@@ -195,8 +195,17 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
         }
         /* @var $block ViewModel */
         $block = $e->getParam('block');
-        if ($block->getOption('esi')) {
+        if ($options = $block->getOption('esi')) {
             $block->setTemplate(self::ESI_TEMPLATE);
+            $handles = isset($options['handles']) ? (array) $options['handles'] : [];
+            $block->setVariable('__HANDLES__', $handles);
+            if ($this->varnishOptions->getDebug()) {
+                $block->setVariables([
+                    '__DEBUG__' => true,
+                    '__TTL__'   => isset($options['ttl']) ? $options['ttl'] : 'n/a',
+                    '__TAGS__'  => $block->getOption('cache_tags', [])
+                ]);
+            }
             $this->injectEsiHeader();
         }
     }

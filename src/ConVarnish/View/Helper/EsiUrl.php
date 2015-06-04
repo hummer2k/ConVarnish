@@ -15,11 +15,20 @@ class EsiUrl extends AbstractHelper
      * @param string $blockId
      * @return array|string
      */
-    public function __invoke($blockId)
+    public function __invoke($blockId, array $handles = [])
     {
+        $options = [];
+        if (count($handles)) {
+            $options = [
+                'query' => [
+                    'handles' => $handles
+                ]
+            ];
+        }
         $url = $this->getView()->url(
             'esi',
-            ['block' => $blockId]
+            ['block' => $blockId],
+            $options
         );
         return $url;
     }
