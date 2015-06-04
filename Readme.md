@@ -1,5 +1,9 @@
 # ConVarnish
 
+Master: [![Build Status](https://travis-ci.org/hummer2k/ConVarnish.svg?branch=master)](https://travis-ci.org/hummer2k/ConVarnish)
+
+Develop: [![Build Status](https://travis-ci.org/hummer2k/ConVarnish.svg?branch=develop)](https://travis-ci.org/hummer2k/ConVarnish)
+
 ## Installation
 
 Install via composer:
@@ -20,5 +24,5 @@ $config = [
 ];
 ````
 
-Copy `vendor/hummer2k/convarnish/config/con-varnish.config.php.dist` to 
+Copy `vendor/hummer2k/convarnish/config/con-varnish.config.php.dist` to
 `config/autoload/con-varnish.global.php`
