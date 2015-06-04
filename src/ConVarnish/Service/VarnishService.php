@@ -9,12 +9,8 @@ use Zend\Http\Response;
  * @package
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
-class VarnishService
+class VarnishService implements VarnishServiceInterface
 {
-    const VARNISH_HEADER_HOST = 'X-Ban-Host';
-    const VARNISH_HEADER_URL  = 'X-Ban-URL';
-    const VARNISH_HEADER_TAGS = 'X-Ban-Tags';
-
     /**
      *
      * @var array
