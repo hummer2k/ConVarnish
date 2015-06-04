@@ -2,6 +2,7 @@
 
 namespace ConVarnishTest\Listener;
 
+use ConLayout\Updater\LayoutUpdaterInterface;
 use ConVarnish\Listener\InjectCacheHeaderListener;
 use ConVarnish\Options\VarnishOptions;
 use ConVarnishTest\AbstractTest;
@@ -31,6 +32,12 @@ class InjectCacheHeaderListenerTest extends AbstractTest
 
     /**
      *
+     * @var LayoutUpdaterInterface
+     */
+    protected $layoutUpdater;
+
+    /**
+     *
      * @var EventManager
      */
     protected $eventManager;
@@ -39,8 +46,11 @@ class InjectCacheHeaderListenerTest extends AbstractTest
     {
         $this->varnishOptions = Bootstrap::getServiceManager()
             ->create('ConVarnish\Options\VarnishOptions');
+        $this->layoutUpdater = Bootstrap::getServiceManager()
+            ->create('ConLayout\Updater\LayoutUpdaterInterface');
         $this->listener = new InjectCacheHeaderListener(
-            $this->varnishOptions
+            $this->varnishOptions,
+            $this->layoutUpdater
         );
         $this->eventManager = new EventManager();
         $this->createMvcEvent();

@@ -1,6 +1,7 @@
 <?php
 namespace ConVarnish\Listener;
 
+use ConLayout\Updater\LayoutUpdaterInterface;
 use ConVarnish\Options\VarnishOptions;
 use Zend\EventManager\EventInterface;
 use Zend\EventManager\EventManagerInterface;
@@ -10,6 +11,7 @@ use Zend\Http\Header\CacheControl;
 use Zend\Http\Header\GenericHeader;
 use Zend\Http\Headers;
 use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ModelInterface;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -22,6 +24,12 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
     const ESI_TEMPLATE = 'con-varnish/esi';
 
     use ListenerAggregateTrait;
+
+    /**
+     *
+     * @var LayoutUpdaterInterface
+     */
+    private $layoutUpdater;
 
     /**
      *
@@ -56,11 +64,15 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
 
     /**
      *
-     * @param array $varnishOptions
+     * @param VarnishOptions $varnishOptions
+     * @param LayoutUpdaterInterface $layoutUpdater
      */
-    public function __construct(VarnishOptions $varnishOptions)
-    {
+    public function __construct(
+        VarnishOptions $varnishOptions,
+        LayoutUpdaterInterface $layoutUpdater
+    ) {
         $this->varnishOptions = $varnishOptions;
+        $this->layoutUpdater  = $layoutUpdater;
     }
 
     /**
@@ -197,8 +209,7 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
         $block = $e->getParam('block');
         if ($options = $block->getOption('esi')) {
             $block->setTemplate(self::ESI_TEMPLATE);
-            $handles = isset($options['handles']) ? (array) $options['handles'] : [];
-            $block->setVariable('__HANDLES__', $handles);
+            $block->setVariable('__HANDLES__', $this->getHandles($block));
             if ($this->varnishOptions->getDebug()) {
                 $block->setVariables([
                     '__DEBUG__' => true,
@@ -208,6 +219,32 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
             }
             $this->injectEsiHeader();
         }
+    }
+
+    /**
+     *
+     * @param ViewModel $block
+     * @return array
+     */
+    private function getHandles(ViewModel $block)
+    {
+        $options = $block->getOption('esi');
+        $optionHandles  = isset($options['handles'])
+            ? (array) $options['handles']
+            : [];
+        $currentHandles = $this->layoutUpdater->getHandles(true);
+        $handlesIndex = [];
+        foreach ($currentHandles as $currentHandle) {
+            $handlesIndex[$currentHandle->getName()] = $currentHandle->getPriority();
+        }
+        $handles = [];
+        foreach ($optionHandles as $optionHandle) {
+            $priority = isset($handlesIndex[$optionHandle])
+                ? $handlesIndex[$optionHandle]
+                : 1;
+            $handles[$optionHandle] = $priority;
+        }
+        return $handles;
     }
 
     /**

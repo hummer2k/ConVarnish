@@ -18,7 +18,11 @@ class InjectCacheHeaderListenerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $varnishOptions = $serviceLocator->get('ConVarnish\Options\VarnishOptions');
-        $routeListener = new InjectCacheHeaderListener($varnishOptions);
+        $layoutUpdater  = $serviceLocator->get('ConLayout\Updater\LayoutUpdaterInterface');
+        $routeListener = new InjectCacheHeaderListener(
+            $varnishOptions,
+            $layoutUpdater
+        );
         return $routeListener;
     }
 }

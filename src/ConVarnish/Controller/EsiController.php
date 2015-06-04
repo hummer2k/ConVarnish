@@ -22,8 +22,8 @@ class EsiController extends AbstractActionController
         $handles = $this->params()->fromQuery('handles', []);
         /* @var $layoutManager LayoutManager */
         $layoutManager = $this->layoutManager();
-        foreach ($handles as $handle) {
-            $layoutManager->addHandle($handle);
+        foreach ($handles as $handle => $priority) {
+            $layoutManager->addHandle($handle, $priority);
         }
         if (!$blockId) {
             return $this->blockNotFound($blockId);
