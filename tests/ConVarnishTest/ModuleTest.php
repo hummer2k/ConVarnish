@@ -3,6 +3,7 @@
 namespace ConVarnishTest;
 
 use ConVarnish\Module;
+use Zend\Console\Console;
 use Zend\EventManager\EventManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
@@ -34,7 +35,11 @@ class ModuleTest extends AbstractTest
         $em = new EventManager();
         $application->setEventManager($em);
         $event->setApplication($application);
+
+        $isConsole = Console::isConsole();
+        Console::overrideIsConsole(false);
         $this->module->onBootstrap($event);
+        Console::overrideIsConsole($isConsole);
 
         $this->assertCount(1, $em->getListeners(MvcEvent::EVENT_DISPATCH));
         $this->assertCount(1, $em->getListeners(MvcEvent::EVENT_RENDER));

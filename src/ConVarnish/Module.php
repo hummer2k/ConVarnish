@@ -1,6 +1,7 @@
 <?php
 namespace ConVarnish;
 
+use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 
@@ -34,6 +35,9 @@ class Module
      */
     public function onBootstrap(MvcEvent $e)
     {
+        if (Console::isConsole()) {
+            return;
+        }
         /* @var $application Application */
         $application = $e->getApplication();
         $serviceManager = $application->getServiceManager();
