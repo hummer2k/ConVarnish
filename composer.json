@@ -23,7 +23,7 @@
     "require-dev": {
         "zendframework/zend-developer-tools": "dev-master",
         "satooshi/php-coveralls": "~0.6",
-        "squizlabs/php_codesniffer": "~1.5.*",
+        "squizlabs/php_codesniffer": "~1.5",
         "phpmd/phpmd": "~2.1.*",
         "sebastian/phpcpd": "~2.0.*",
         "pdepend/pdepend": "~2.0.*",
