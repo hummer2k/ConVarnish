@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="name-of-project" default="build">
+<project name="con-varnish" default="build">
  <!-- By default, we assume all tools to be on the $PATH -->
  <property name="toolsdir" value=""/>
 
  <!-- Uncomment the following when the tools are in ${basedir}/vendor/bin -->
 <property name="toolsdir" value="${basedir}/vendor/bin/"/> 
+
+<target name="composer" description="Installing composer dependencies">
+  <exec executable="composer" failonerror="true">
+   <arg value="install" />
+   <arg value="--dev" />
+   <arg value="--prefer-dist" />
+   <arg value="--no-progress" />
+ 
+   <env key="APPLICATION_ENV" value="test"/>
+  </exec>
+</target>
 
  <target name="build"
          depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox"
