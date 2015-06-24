@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="con-varnish" default="build">
- <!-- By default, we assume all tools to be on the $PATH -->
- <property name="toolsdir" value=""/>
 
- <!-- Uncomment the following when the tools are in ${basedir}/vendor/bin -->
 <property name="toolsdir" value="${basedir}/vendor/bin/"/> 
 
-
 <target name="build"
-         depends="prepare,lint,composer,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit"
+         depends="prepare,lint,composer,phpcs-ci,phpunit"
          description=""/>
 
 <target name="build-parallel"
