@@ -16,14 +16,6 @@ use Zend\View\Renderer\PhpRenderer;
  */
 class EsiUrlTest extends AbstractTest
 {
-    public function testFactory()
-    {
-        $factory = new EsiUrlFactory();
-        $serviceManager = new ServiceManager();
-        $instance = $factory->createService($serviceManager);
-        $this->assertInstanceOf('ConVarnish\View\Helper\EsiUrl', $instance);
-    }
-
     public function testInvoke()
     {
         $renderer = new PhpRenderer();
