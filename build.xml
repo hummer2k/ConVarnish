@@ -4,8 +4,8 @@
 <property name="toolsdir" value="${basedir}/vendor/bin/"/> 
 
 <target name="build"
-         depends="prepare,lint,composer,phpcs-ci,phpunit"
-         description=""/>
+        depends="composer,phpcs-ci,phpunit"
+        description=""/>
  
  <target name="composer" description="Installing composer dependencies">
   <exec executable="composer" failonerror="true">
@@ -15,26 +15,6 @@
    <env key="APPLICATION_ENV" value="test"/>
   </exec>
 </target>
-
-<target name="lint"
-         unless="lint.done"
-         description="Perform syntax check of sourcecode files">
-  <apply executable="php" failonerror="true" taskname="lint">
-   <arg value="-l" />
-
-   <fileset dir="${basedir}/src">
-    <include name="**/*.php" />
-    <modified />
-   </fileset>
-
-   <fileset dir="${basedir}/tests">
-    <include name="**/*.php" />
-    <modified />
-   </fileset>
-  </apply>
-
-  <property name="lint.done" value="true"/>
- </target>
 
  <target name="phpcs-ci"
          unless="phpcs.done"
