@@ -12,7 +12,7 @@ Develop:
 
 Install via composer:
 
-`$ composer require hummerk2/convarnish:dev-master`
+`$ composer require hummerk2/convarnish:~1.0`
 
 Enable module in your application.config.php
 
