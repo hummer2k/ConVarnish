@@ -44,13 +44,6 @@
         <property name="prepare.done" value="true"/>
     </target>
 
-    <target name="copy-parameters" description="Copy phpunit.xml file">
-        <exec executable="cp" failonerror="true">
-            <arg path="phpunit.xml.dist" />
-            <arg path="build/phpunit.xml" />
-        </exec>
-    </target>
-
     <target name="composer" description="Installing composer dependencies">
         <exec executable="composer" failonerror="true">
             <arg value="install" />
