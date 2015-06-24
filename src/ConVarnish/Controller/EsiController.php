@@ -13,7 +13,7 @@ class EsiController extends AbstractActionController
 {
     /**
      * return single block for esi processing
-     *
+     * @codeCoverageIgnore
      * @return ViewModel
      */
     public function blockAction()
@@ -38,7 +38,7 @@ class EsiController extends AbstractActionController
     }
 
     /**
-     *
+     * @codeCoverageIgnore
      * @param string $blockName
      * @return ViewModel
      */
