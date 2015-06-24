@@ -4,7 +4,7 @@
 <property name="toolsdir" value="${basedir}/vendor/bin/"/> 
 
 <target name="build"
-        depends="composer,phpcs-ci,phpunit"
+        depends="composer,phpunit"
         description=""/>
  
  <target name="composer" description="Installing composer dependencies">
@@ -16,25 +16,10 @@
   </exec>
 </target>
 
- <target name="phpcs-ci"
-         unless="phpcs.done"
-         depends="prepare"
-         description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
-  <exec executable="${toolsdir}phpcs" output="/dev/null" taskname="phpcs">
-   <arg value="--report=checkstyle" />
-   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-   <arg value="--standard=PSR2" />
-   <arg value="--extensions=php" />
-   <arg value="--ignore=autoload.php" />
-   <arg path="${basedir}/src" />
-  </exec>
-
-  <property name="phpcs.done" value="true"/>
- </target>
 
  <target name="phpunit"
          unless="phpunit.done"
-         depends="prepare"
+         depends="composer"
          description="Run unit tests with PHPUnit">
   <exec executable="${toolsdir}phpunit" failonerror="true" taskname="phpunit">
    <arg value="--configuration"/>
