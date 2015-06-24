@@ -8,11 +8,11 @@
 
 
 <target name="build"
-         depends="prepare,lint,composer,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox"
+         depends="prepare,lint,composer,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit"
          description=""/>
 
 <target name="build-parallel"
-         depends="prepare,lint,tools-parallel,phpunit,phpdox"
+         depends="prepare,lint,tools-parallel,phpunit"
          description=""/>
  
  <target name="composer" description="Installing composer dependencies">
