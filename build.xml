@@ -2,11 +2,11 @@
 <project name="con-varnish" default="build">
     <property name="toolsdir" value="${basedir}/vendor/bin/" />
     <target name="build"
-            depends="prepare,composer,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox"
+            depends="prepare,composer,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit"
             description=""/>
 
     <target name="build-parallel"
-            depends="prepare,lint,tools-parallel,phpunit,phpdox"
+            depends="prepare,lint,tools-parallel,phpunit"
             description=""/>
 
     <target name="tools-parallel" description="Run tools in parallel">
@@ -167,12 +167,4 @@
         </exec>
     </target>
 
-    <target name="phpdox"
-            depends="phploc-ci,phpcs-ci,phpmd-ci"
-            description="Generate project documentation using phpDox">
-        <exec executable="${toolsdir}phpdox">
-            <arg value="--file" />
-            <arg value="${basedir}/build/phpdox.xml" />
-        </exec>
-    </target>
 </project>
