@@ -2,6 +2,8 @@
 namespace ConVarnish\Controller;
 
 use ConLayout\Controller\Plugin\LayoutManager;
+use ConLayout\Generator\BlocksGenerator;
+use ConLayout\Handle\Handle;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -23,12 +25,12 @@ class EsiController extends AbstractActionController
         /* @var $layoutManager LayoutManager */
         $layoutManager = $this->layoutManager();
         foreach ($handles as $handle => $priority) {
-            $layoutManager->addHandle($handle, $priority);
+            $layoutManager->addHandle(new Handle($handle, $priority));
         }
         if (!$blockId) {
             return $this->blockNotFound($blockId);
         }
-        $layoutManager->load();
+        $layoutManager->generate([BlocksGenerator::NAME => true]);
         if (!$block = $layoutManager->getBlock($blockId)) {
             $block = $this->blockNotFound($blockId);
         }
@@ -39,13 +41,13 @@ class EsiController extends AbstractActionController
 
     /**
      *
-     * @param string $blockName
+     * @param string $blockId
      * @return ViewModel
      */
-    protected function blockNotFound($blockName)
+    protected function blockNotFound($blockId)
     {
         $viewModel = new ViewModel(array(
-            'blockName' => $blockName
+            'blockId' => $blockId
         ));
         $viewModel->setTemplate('con-varnish/block-not-found');
         return $viewModel;

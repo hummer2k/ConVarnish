@@ -26,9 +26,10 @@ abstract class AbstractTest extends PHPUnit_Framework_TestCase
         $response = new Response();
         $routeMatch = new RouteMatch([]);
         $routeMatch->setMatchedRouteName('test/route');
+        $routeMatch->setParam('controller', 'Application\Controller\Index');
+        $routeMatch->setParam('action', 'index');
         $this->mvcEvent->setRouteMatch($routeMatch);
         $this->mvcEvent->setRequest($request);
         $this->mvcEvent->setResponse($response);
     }
-
 }

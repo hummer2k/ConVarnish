@@ -15,6 +15,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
+            'ConVarnish\Controller\Admin' => 'ConVarnish\Controller\AdminControllerFactory',
             'ConVarnish\Controller\Esi' => 'ConVarnish\Controller\EsiControllerFactory'
         ]
     ],

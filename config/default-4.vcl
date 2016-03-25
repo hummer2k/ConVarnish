@@ -4,7 +4,7 @@ import std;
 
 backend default {
     .host = "localhost";
-    .port = "8080";
+    .port = "80";
 }
 
 acl ban {
@@ -62,7 +62,7 @@ sub vcl_recv {
     }
 
     # not cacheable by default
-    if (req.http.Authorization || req.http.Https) {
+    if (req.http.Authorization) {
         return (pass);
     }
 
@@ -145,6 +145,5 @@ sub vcl_deliver {
         set resp.http.Cache-Control = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0";
         set resp.http.Pragma = "no-cache";
         set resp.http.Expires = "Mon, 31 Mar 2008 10:00:00 GMT";
-        set resp.http.Age = "0";
     }
 }

@@ -2,6 +2,10 @@
 return [
     'varnish' => [
         /**
+         * deny: do not cache if no match
+         */
+        'policy' => \ConVarnish\Options\VarnishOptions::POLICY_DENY,
+        /**
          * enable caching
          */
         'cache_enabled' => false,
@@ -10,7 +14,7 @@ return [
          */
         'use_esi' => false,
         /**
-         * default ttl when no specified in 'cacheable_routes'
+         * default ttl if policy == allow
          */
         'default_ttl' => 14400,
         /**
@@ -23,28 +27,47 @@ return [
         'servers' => [
             'default' => [
                 'ip' => '127.0.0.1',
-                'port' => 80
+                'port' => 6081
             ]
         ],
         /**
-         * list of uncacheable routes
+         * set ttl per controller action.
+         *
+         * use false as ttl to disable caching for this action         *
+         *
+         * supports wildcard (*)
+         *
+         * [
+         *   'Application\Controller\Index::view' => 120,
+         *   'Application\Controller\Index*' => 240,
+         *   'User\Controller\Account*' => false
+         * ]
          */
-        'uncacheable_routes' => [
-            'application*',
-            //'home'
-        ],
-        'cacheable_routes' => [
-            /**
-             * format:
-             *
-             * routeName => ttl
-             *
-             * cache all routes that start with application* for 120 seconds
-             *  'application*' => 120
-             *
-             * cache this route for 1 hour
-             *  'application/default' => 3600
-             */
+        'cacheable_actions' => [],
+        /**
+         * set ttl per matched route name
+         *
+         * use false as ttl to disable caching for this route
+         *
+         * suports wildcard (*)
+         *
+         * [
+         *     'application/default' => 120,
+         *     'application/*' => 3600,
+         *     'user/account*' => false
+         * ]
+         */
+        'cacheable_routes' => [],
+        /**
+         * registered caching strategies
+         *
+         * [service name => priority]
+         */
+        'caching_strategies' => [
+            \ConVarnish\Strategy\ActionStrategy::class  => 2000,
+            \ConVarnish\Strategy\RouteStrategy::class   => 1500,
+            \ConVarnish\Strategy\EsiStrategy::class     => 1000,
+            \ConVarnish\Strategy\DefaultStrategy::class => 500
         ]
     ]
 ];

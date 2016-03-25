@@ -7,7 +7,6 @@ use ConVarnishTest\AbstractTest;
 use ConVarnishTest\Bootstrap;
 use Zend\Http\Client\Adapter\Test;
 
-
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>

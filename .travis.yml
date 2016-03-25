@@ -13,12 +13,11 @@ before_script:
   
 script:
   - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml
-  - ./vendor/bin/phpcs --standard=PSR2 ./src/
+  - ./vendor/bin/phpcs --standard=PSR2 ./src/ ./tests/
 
 after_script:
   - ./vendor/bin/coveralls -v
 
 matrix:
   allow_failures:
-    - php: 7.0
     - php: hhvm

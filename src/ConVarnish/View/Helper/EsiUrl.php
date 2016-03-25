@@ -13,6 +13,7 @@ class EsiUrl extends AbstractHelper
     /**
      *
      * @param string $blockId
+     * @param array $handles
      * @return array|string
      */
     public function __invoke($blockId, array $handles = [])

@@ -2,6 +2,8 @@
 
 namespace ConVarnish\Service;
 
+use Zend\Http\Response;
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>

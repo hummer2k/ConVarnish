@@ -75,8 +75,7 @@ class InjectTagsHeaderListenerTest extends AbstractTest
         $headers = $response->getHeaders();
         $this->assertEquals(
             'tag1,tag2,tag3',
-            $headers->get(VarnishService::VARNISH_HEADER_TAGS)
-                ->getFieldValue()
+            $headers->get(VarnishService::VARNISH_HEADER_TAGS)->getFieldValue()
         );
     }
 }

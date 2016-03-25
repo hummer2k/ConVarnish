@@ -1,6 +1,7 @@
 <?php
 namespace ConVarnish;
 
+use ConVarnish\Options\VarnishOptions;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 
@@ -35,9 +36,11 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         /* @var $application Application */
-        $application = $e->getApplication();
+        $application    = $e->getApplication();
         $serviceManager = $application->getServiceManager();
-        $eventManager = $application->getEventManager();
+        $eventManager   = $application->getEventManager();
+        /** @var VarnishOptions $varnishOptions */
+        $varnishOptions = $serviceManager->get(VarnishOptions::class);
 
         $listeners = [
             'ConVarnish\Listener\InjectCacheHeaderListener',
@@ -47,6 +50,12 @@ class Module
         foreach ($listeners as $listener) {
             $eventManager->attach($serviceManager->get($listener));
         }
+
+        $cachingStrategies = $varnishOptions->getCachingStrategies();
+        foreach ($cachingStrategies as $cachingStrategy => $priority) {
+            $serviceManager->get($cachingStrategy)->attach($eventManager, $priority);
+        }
+
     }
 
     /**
