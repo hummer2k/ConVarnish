@@ -1,4 +1,10 @@
 <?php
+/**
+ * @codeCoverageIgnore
+ * @package ConVarnish
+ * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
+ */
+
 namespace ConVarnish\Controller;
 
 use ConLayout\Controller\Plugin\LayoutManager;
@@ -7,10 +13,6 @@ use ConLayout\Handle\Handle;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-/**
- * @package ConVarnish
- * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
- */
 class EsiController extends AbstractActionController
 {
     /**
