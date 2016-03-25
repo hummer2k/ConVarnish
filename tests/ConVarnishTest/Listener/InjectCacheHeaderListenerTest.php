@@ -197,6 +197,40 @@ class InjectCacheHeaderListenerTest extends AbstractTest
 
     }
 
+    public function testStrategyPriorities()
+    {
+        $this->attachStrategy(RouteStrategy::class, 200);
+        $this->attachStrategy(ActionStrategy::class, 600);
+
+        $this->varnishOptions->setCacheableActions([
+            'Application\Controller\Index*' => 120
+        ]);
+        $this->varnishOptions->setCacheableRoutes([
+            'test/route' => 360
+        ]);
+
+        $this->listener->injectCacheHeader($this->mvcEvent);
+
+        $this->assertEquals(120, $this->listener->getTtl());
+    }
+
+    public function testStrategyWithoutMatch()
+    {
+        $this->attachStrategy(RouteStrategy::class, 200);
+        $this->attachStrategy(ActionStrategy::class, 600);
+
+        $this->varnishOptions->setCacheableActions([
+            'No\Match*' => 120
+        ]);
+        $this->varnishOptions->setCacheableRoutes([
+            'test/route' => 360
+        ]);
+
+        $this->listener->injectCacheHeader($this->mvcEvent);
+
+        $this->assertEquals(360, $this->listener->getTtl());
+    }
+
     protected function attachStrategy($class, $priority = 500)
     {
         /** @var AbstractCachingStrategy $strategy */
