@@ -1,34 +1,35 @@
 <?php
+
 namespace ConVarnishTest\View\Helper;
 
 use ConVarnish\View\Helper\EsiUrl;
 use ConVarnish\View\Helper\EsiUrlFactory;
-use Zend\Mvc\Router\Http\RouteMatch;
-use Zend\Mvc\Router\Http\TreeRouteStack;
-use Zend\Mvc\Service\ViewHelperManagerFactory;
+use ConVarnishTest\AbstractTest;
+use ConVarnishTest\Bootstrap;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\Helper\Url;
-use Zend\View\HelperPluginManager;
 use Zend\View\Renderer\PhpRenderer;
-use Zend\View\Renderer\RendererInterface;
-use Zend\View\View;
 
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
-class EsiUrlTest extends \PHPUnit_Framework_TestCase
+class EsiUrlTest extends AbstractTest
 {
-    public function testFactory()
+    public function testInvoke()
     {
-        $factory = new EsiUrlFactory();
-        $helperManager = new HelperPluginManager();
-        $helperManager->setServiceLocator(new ServiceManager());
+        $renderer = new PhpRenderer();
+        /* @var $url Url */
+        $url = $renderer->plugin('url');
+        $url->setRouter(Bootstrap::getServiceManager()->get('HttpRouter'));
+        $esiUrl = new EsiUrl();
+        $esiUrl->setView($renderer);
 
-        $this->assertInstanceOf(
-            EsiUrl::class,
-            $factory->createService($helperManager)
+        $this->assertEquals('/esi/my-block', call_user_func($esiUrl, 'my-block'));
+
+        $this->assertEquals(
+            '/esi/my-block?handles%5B0%5D=handle1&handles%5B1%5D=handle2',
+            call_user_func($esiUrl, 'my-block', ['handle1', 'handle2'])
         );
-
     }
 }

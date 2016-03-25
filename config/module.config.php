@@ -6,17 +6,16 @@ return [
         ],
     ],
     'view_helpers' => [
-        'factories' => [
-            'ConVarnish\View\Helper\EsiUrl' => 'ConVarnish\View\Helper\EsiUrlFactory'
+        'invokables' => [
+            'ConVarnish\View\Helper\EsiUrl' => 'ConVarnish\View\Helper\EsiUrl'
         ],
         'aliases' => [
             'esiUrl' => 'ConVarnish\View\Helper\EsiUrl'
         ]
     ],
     'controllers' => [
-        'factories' => [
-            'ConVarnish\Controller\Admin' => 'ConVarnish\Controller\AdminControllerFactory',
-            'ConVarnish\Controller\Esi' => 'ConVarnish\Controller\EsiControllerFactory'
+        'invokables' => [
+            'ConVarnish\Controller\Esi' => 'ConVarnish\Controller\EsiController'
         ]
     ],
     'router' => [
