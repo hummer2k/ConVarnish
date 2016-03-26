@@ -1,1 +1,3 @@
-<div class="alert alert-error"><?= $this->blockName ?> not found</div>
+<div class="alert alert-error">
+    <?= $this->translate(sprintf('Block with id "%s" not found.', $this->blockId)) ?>
+</div>

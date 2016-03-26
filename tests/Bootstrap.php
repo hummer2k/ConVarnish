@@ -1,4 +1,5 @@
 <?php
+// @codingStandardsIgnoreFile
 namespace ConVarnishTest;
 
 use Zend\Loader\AutoloaderFactory;
@@ -29,7 +30,7 @@ class Bootstrap
         if (isset($testConfig['module_listener_options']['module_paths'])) {
             $modulePaths = $testConfig['module_listener_options']['module_paths'];
             foreach ($modulePaths as $modulePath) {
-                if (($path = static::findParentPath($modulePath)) ) {
+                if (($path = static::findParentPath($modulePath))) {
                     $zf2ModulePaths[] = $path;
                 }
             }
@@ -104,7 +105,9 @@ class Bootstrap
         $previousDir = '.';
         while (!is_dir($dir . '/' . $path)) {
             $dir = dirname($dir);
-            if ($previousDir === $dir) return false;
+            if ($previousDir === $dir) {
+                return false;
+            }
             $previousDir = $dir;
         }
         return $dir . '/' . $path;

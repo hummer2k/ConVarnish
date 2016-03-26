@@ -1,14 +1,23 @@
 <?php
-namespace ConVarnish\Options;
-
-use Zend\Stdlib\AbstractOptions;
-
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
+
+namespace ConVarnish\Options;
+
+use Zend\Stdlib\AbstractOptions;
+
 class VarnishOptions extends AbstractOptions
 {
+    const POLICY_ALLOW = 'allow';
+    const POLICY_DENY  = 'deny';
+
+    /**
+     * @var string
+     */
+    protected $policy = self::POLICY_ALLOW;
+
     /**
      *
      * @var boolean
@@ -22,16 +31,15 @@ class VarnishOptions extends AbstractOptions
     protected $defaultTtl = 14400;
 
     /**
-     *
      * @var array
      */
-    protected $cacheableRoutes = [];
+    protected $cacheableActions = [];
 
     /**
      *
      * @var array
      */
-    protected $uncacheableRoutes = [];
+    protected $cacheableRoutes = [];
 
     /**
      *
@@ -51,6 +59,11 @@ class VarnishOptions extends AbstractOptions
      * @var bool
      */
     protected $useEsi = false;
+
+    /**
+     * @var array
+     */
+    protected $cachingStrategies = [];
 
     /**
      *
@@ -112,47 +125,109 @@ class VarnishOptions extends AbstractOptions
         return $this->cacheableRoutes;
     }
 
+    /**
+     * @return bool
+     */
     public function getDebug()
     {
         return $this->debug;
     }
 
+    /**
+     * @param $debug
+     * @return $this
+     */
     public function setDebug($debug)
     {
         $this->debug = $debug;
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getServers()
     {
         return $this->servers;
     }
 
+    /**
+     * @param array $servers
+     * @return $this
+     */
     public function setServers(array $servers)
     {
         $this->servers = $servers;
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function useEsi()
     {
         return $this->useEsi;
     }
 
+    /**
+     * @param $useEsi
+     * @return $this
+     */
     public function setUseEsi($useEsi)
     {
         $this->useEsi = $useEsi;
         return $this;
     }
-    
-    public function getUncacheableRoutes()
+
+    /**
+     * @return array
+     */
+    public function getCacheableActions()
     {
-        return $this->uncacheableRoutes;
+        return $this->cacheableActions;
     }
 
-    public function setUncacheableRoutes(array $uncacheableRoutes)
+    /**
+     * @param array $cacheableActions
+     * @return VarnishOptions
+     */
+    public function setCacheableActions($cacheableActions)
     {
-        $this->uncacheableRoutes = $uncacheableRoutes;
+        $this->cacheableActions = $cacheableActions;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPolicy()
+    {
+        return $this->policy;
+    }
+
+    /**
+     * @param string $policy
+     * @return VarnishOptions
+     */
+    public function setPolicy($policy)
+    {
+        $this->policy = $policy;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCachingStrategies()
+    {
+        return $this->cachingStrategies;
+    }
+
+    /**
+     * @param array $cachingStrategies
+     */
+    public function setCachingStrategies(array $cachingStrategies)
+    {
+        $this->cachingStrategies = $cachingStrategies;
     }
 }

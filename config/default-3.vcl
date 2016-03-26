@@ -64,7 +64,7 @@ sub vcl_recv {
     }
 
     # not cacheable by default
-    if (req.http.Authorization || req.http.Https) {
+    if (req.http.Authorization) {
         return (pass);
     }
 

@@ -1,18 +1,19 @@
 <?php
+/**
+ * @package ConVarnish
+ * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
+ */
 
 namespace ConVarnish\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 
-/**
- * @package ConVarnish
- * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
- */
 class EsiUrl extends AbstractHelper
 {
     /**
      *
      * @param string $blockId
+     * @param array $handles
      * @return array|string
      */
     public function __invoke($blockId, array $handles = [])

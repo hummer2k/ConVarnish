@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package ConVarnish
+ * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
+ */
 
 namespace ConVarnish\Listener;
 
@@ -11,10 +15,6 @@ use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Model\ViewModel;
 
-/**
- * @package ConVarnish
- * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
- */
 class InjectTagsHeaderListener implements ListenerAggregateInterface
 {
     const OPTION_CACHE_TAGS = 'cache_tags';

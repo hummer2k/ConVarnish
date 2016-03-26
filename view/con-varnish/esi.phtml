@@ -1,14 +1,14 @@
 <?php
 use ConLayout\Layout\LayoutInterface;
-$blockId = LayoutInterface::BLOCK_ID_VAR;
-$esiUrl = $this->esiUrl($this->{$blockId}, $this->__HANDLES__);
+$blockId = $block->getOption('block_id');
+$esiUrl = $this->esiUrl($blockId, $this->__HANDLES__);
 ?>
 <?php if ($this->__DEBUG__): ?>
 <!--
-    [ ESI START: <?= $this->{$blockId} ?> ]
+    [ ESI START: <?= $blockId ?> ]
     [ TTL: <?= $this->__TTL__ ?> ]
 <?php if (count($this->__HANDLES__)): ?>
-    [ Handles: <?= implode(', ', $this->__HANDLES__) ?> ]
+    [ Handles: <?= implode(', ', array_keys($this->__HANDLES__)) ?> ]
 <?php endif ?>
 <?php if (count($this->__TAGS__)): ?>
     [ Ban-Tags: <?= implode(', ', $this->__TAGS__) ?> ]
@@ -21,5 +21,5 @@ $esiUrl = $this->esiUrl($this->{$blockId}, $this->__HANDLES__);
     <?= $this->content ?>
 </esi:remove>
 <?php if ($this->__DEBUG__): ?>
-<!-- [ ESI STOP: <?= $this->{$blockId} ?> ] -->
+<!-- [ ESI STOP: <?= $blockId ?> ] -->
 <?php endif; ?>

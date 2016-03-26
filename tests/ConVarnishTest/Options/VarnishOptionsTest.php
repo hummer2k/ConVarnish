@@ -20,6 +20,9 @@ class VarnishOptionsTest extends AbstractTest
         $options->setCacheableRoutes(['test/route' => 60]);
         $this->assertEquals(['test/route' => 60], $options->getCacheableRoutes());
 
+        $options->setPolicy(VarnishOptions::POLICY_ALLOW);
+        $this->assertEquals(VarnishOptions::POLICY_ALLOW, $options->getPolicy());
+
         $options->setDebug(true);
         $this->assertTrue($options->getDebug());
 

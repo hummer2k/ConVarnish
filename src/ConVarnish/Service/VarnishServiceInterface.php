@@ -1,11 +1,13 @@
 <?php
-
-namespace ConVarnish\Service;
-
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
+
+namespace ConVarnish\Service;
+
+use Zend\Http\Response;
+
 interface VarnishServiceInterface
 {
     const VARNISH_HEADER_HOST = 'X-Ban-Host';

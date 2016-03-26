@@ -12,7 +12,7 @@ Develop:
 
 Install via composer:
 
-`$ composer require hummerk2/convarnish:dev-master`
+`$ composer require hummerk2/convarnish:~2.0`
 
 Enable module in your application.config.php
 
@@ -28,5 +28,5 @@ $config = [
 ];
 ````
 
-Copy `vendor/hummer2k/convarnish/config/con-varnish.config.php.dist` to
+Copy `convarnish/config/con-varnish.config.php.dist` to
 `config/autoload/con-varnish.global.php`

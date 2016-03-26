@@ -1,9 +1,18 @@
 <?php
+/**
+ * @package ConVarnish
+ * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
+ */
+
 namespace ConVarnish\Listener;
 
+use ConLayout\Block\Factory\BlockFactory;
 use ConLayout\Updater\LayoutUpdaterInterface;
 use ConVarnish\Options\VarnishOptions;
+use ConVarnish\Strategy\CachingStrategyInterface;
 use Zend\EventManager\EventInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
@@ -14,16 +23,16 @@ use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ModelInterface;
 use Zend\View\Model\ViewModel;
 
-/**
- * @package ConVarnish
- * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
- */
-class InjectCacheHeaderListener implements ListenerAggregateInterface
+class InjectCacheHeaderListener implements
+    ListenerAggregateInterface,
+    EventManagerAwareInterface
 {
     const HEADER_CACHE_DEBUG = 'X-Cache-Debug';
     const ESI_TEMPLATE = 'con-varnish/esi';
+    const EVENT_DETERMINE_TTL = 'determine_ttl';
 
     use ListenerAggregateTrait;
+    use EventManagerAwareTrait;
 
     /**
      *
@@ -65,14 +74,26 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
     /**
      *
      * @param VarnishOptions $varnishOptions
+     */
+    public function __construct(VarnishOptions $varnishOptions)
+    {
+        $this->varnishOptions = $varnishOptions;
+    }
+
+    /**
+     * @return LayoutUpdaterInterface
+     */
+    public function getLayoutUpdater()
+    {
+        return $this->layoutUpdater;
+    }
+
+    /**
      * @param LayoutUpdaterInterface $layoutUpdater
      */
-    public function __construct(
-        VarnishOptions $varnishOptions,
-        LayoutUpdaterInterface $layoutUpdater
-    ) {
-        $this->varnishOptions = $varnishOptions;
-        $this->layoutUpdater  = $layoutUpdater;
+    public function setLayoutUpdater(LayoutUpdaterInterface $layoutUpdater)
+    {
+        $this->layoutUpdater = $layoutUpdater;
     }
 
     /**
@@ -91,8 +112,8 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
         ) {
             $events->attach(MvcEvent::EVENT_DISPATCH, [$this, 'determineEsiProcessing'], -15);
             $events->getSharedManager()->attach(
-                'ConLayout\Block\Factory\BlockFactory',
-                'createBlock.post',
+                BlockFactory::class,
+                'configure.post',
                 [$this, 'injectEsi']
             );
         }
@@ -104,30 +125,30 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
      */
     public function injectCacheHeader(MvcEvent $e)
     {
-        $routeMatch = $e->getRouteMatch();
-        $routeName = $routeMatch->getMatchedRouteName();
+        $cacheEvent = clone $e;
+        $cacheEvent->setTarget($this);
+        $cacheEvent->setName(self::EVENT_DETERMINE_TTL);
 
-        if (!$this->canCacheRoute($routeName)) {
-            $ttl = 0;
+        if ($this->varnishOptions->isCacheEnabled()) {
+            $result = $this->getEventManager()->trigger(
+                $cacheEvent,
+                function ($result) {
+                    return $result instanceof CachingStrategyInterface;
+                }
+            );
+            /** @var CachingStrategyInterface $strategy */
+            $strategy = $result->last();
+            $ttl = $strategy->getTtl();
         } else {
-            $ttl = $this->getTtlForRoute($routeName);
+            $ttl = 0;
         }
 
         $headers = $e->getResponse()->getHeaders();
 
         if ($this->varnishOptions->getDebug()) {
-            $debug = new GenericHeader(self::HEADER_CACHE_DEBUG, '1');
+            $debugValue = isset($strategy) ? get_class($strategy) : 'caching disabled';
+            $debug = new GenericHeader(self::HEADER_CACHE_DEBUG, $debugValue);
             $headers->addHeader($debug);
-        }
-
-        $viewModel = $e->getViewModel();
-        $esiOptions = (array) $viewModel->getOption('esi', []);
-        if (isset($esiOptions['ttl'])) {
-            $ttl = (int) $esiOptions['ttl'];
-        }
-
-        if (!$this->varnishOptions->isCacheEnabled()) {
-            $ttl = 0;
         }
 
         $cacheControl = new CacheControl();
@@ -144,39 +165,7 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
         }
         $headers->addHeader($cacheControl);
 
-        $this->ttl = $ttl;
-    }
-
-    /**
-     *
-     * @param string $routeName
-     * @return int
-     */
-    private function getTtlForRoute($routeName)
-    {
-        $cacheableRoutes = $this->varnishOptions->getCacheableRoutes();
-        foreach ($cacheableRoutes as $pattern => $ttl) {
-            if (fnmatch($pattern, $routeName)) {
-                return (int) $ttl;
-            }
-        }
-        return $this->varnishOptions->getDefaultTtl();
-    }
-
-    /**
-     *
-     * @param string $routeName
-     * @return boolean
-     */
-    private function canCacheRoute($routeName)
-    {
-        $uncacheableRoutes = $this->varnishOptions->getUncacheableRoutes();
-        foreach ($uncacheableRoutes as $pattern) {
-            if (fnmatch($pattern, $routeName)) {
-                return false;
-            }
-        }
-        return true;
+        $this->setTtl($ttl);
     }
 
     /**
@@ -264,7 +253,7 @@ class InjectCacheHeaderListener implements ListenerAggregateInterface
      */
     public function canUseEsi()
     {
-        return (bool) $this->canUseEsi;
+        return (bool) $this->canUseEsi && $this->layoutUpdater;
     }
 
     /**

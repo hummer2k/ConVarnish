@@ -1,13 +1,17 @@
 <?php
-namespace ConVarnish\Listener;
-
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
+
+namespace ConVarnish\Listener;
+
+use ConLayout\Updater\LayoutUpdaterInterface;
+use ConVarnish\Options\VarnishOptions;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
 class InjectCacheHeaderListenerFactory implements FactoryInterface
 {
     /**
@@ -17,12 +21,17 @@ class InjectCacheHeaderListenerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $varnishOptions = $serviceLocator->get('ConVarnish\Options\VarnishOptions');
-        $layoutUpdater  = $serviceLocator->get('ConLayout\Updater\LayoutUpdaterInterface');
-        $routeListener = new InjectCacheHeaderListener(
-            $varnishOptions,
-            $layoutUpdater
-        );
+        return $this($serviceLocator, InjectCacheHeaderListener::class);
+    }
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        /** @var VarnishOptions $varnishOptions */
+        $varnishOptions = $container->get(VarnishOptions::class);
+        $routeListener = new InjectCacheHeaderListener($varnishOptions);
+        if ($container->has('ConLayout\Updater\LayoutUpdaterInterface')) {
+            $routeListener->setLayoutUpdater($container->get(LayoutUpdaterInterface::class));
+        }
         return $routeListener;
     }
 }

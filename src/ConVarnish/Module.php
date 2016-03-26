@@ -1,11 +1,28 @@
 <?php
+/**
+ * @package ConVarnish
+ * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
+ */
+
 namespace ConVarnish;
 
+use ConVarnish\Listener\InjectCacheHeaderListener;
+use ConVarnish\Listener\InjectTagsHeaderListener;
+use ConVarnish\Options\VarnishOptions;
+use Zend\EventManager\EventInterface;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 
-class Module
+class Module implements
+    ConfigProviderInterface,
+    ServiceProviderInterface,
+    BootstrapListenerInterface,
+    AutoloaderProviderInterface
 {
     /**
      * retrieve module config
@@ -30,27 +47,34 @@ class Module
     }
 
     /**
-     *
-     * @param MvcEvent $e
+     * @param EventInterface $e
      */
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(EventInterface $e)
     {
         if (Console::isConsole()) {
             return;
         }
         /* @var $application Application */
-        $application = $e->getApplication();
+        $application    = $e->getApplication();
         $serviceManager = $application->getServiceManager();
-        $eventManager = $application->getEventManager();
+        $eventManager   = $application->getEventManager();
+        /** @var VarnishOptions $varnishOptions */
+        $varnishOptions = $serviceManager->get(VarnishOptions::class);
 
         $listeners = [
-            'ConVarnish\Listener\InjectCacheHeaderListener',
-            'ConVarnish\Listener\InjectTagsHeaderListener'
+            InjectCacheHeaderListener::class,
+            InjectTagsHeaderListener::class
         ];
 
         foreach ($listeners as $listener) {
-            $eventManager->attach($serviceManager->get($listener));
+            $serviceManager->get($listener)->attach($eventManager);
         }
+
+        $cachingStrategies = $varnishOptions->getCachingStrategies();
+        foreach ($cachingStrategies as $cachingStrategy => $priority) {
+            $serviceManager->get($cachingStrategy)->attach($eventManager, $priority);
+        }
+
     }
 
     /**
@@ -63,7 +87,7 @@ class Module
         return [
             'Zend\Loader\StandardAutoloader' => [
                 'namespaces' => [
-                    __NAMESPACE__ => __DIR__ . '/../'. __NAMESPACE__,
+                    __NAMESPACE__ => __DIR__
                 ],
             ],
         ];
