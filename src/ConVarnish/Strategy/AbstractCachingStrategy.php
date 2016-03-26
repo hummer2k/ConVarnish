@@ -79,4 +79,12 @@ abstract class AbstractCachingStrategy implements CachingStrategyInterface
     {
         return $this->ttl;
     }
+
+    /**
+     * @param $ttl
+     */
+    protected function setTtl($ttl)
+    {
+        $this->ttl = (int) $ttl;
+    }
 }

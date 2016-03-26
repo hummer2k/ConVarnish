@@ -1,14 +1,14 @@
 <?php
+/**
+ * @package ConVarnish
+ * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
+ */
 
 namespace ConVarnish\Service;
 
 use Zend\Http\Client;
 use Zend\Http\Response;
 
-/**
- * @package
- * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
- */
 class VarnishService implements VarnishServiceInterface
 {
     /**

@@ -17,9 +17,11 @@ class DefaultStrategy extends AbstractCachingStrategy
     public function determineTtl(MvcEvent $e)
     {
         $policy = $this->varnishOptions->getPolicy();
-        $this->ttl = $policy === VarnishOptions::POLICY_ALLOW
-            ? $this->varnishOptions->getDefaultTtl()
-            : 0;
+        if ($policy === VarnishOptions::POLICY_ALLOW) {
+            $this->setTtl($this->varnishOptions->getDefaultTtl());
+        } else {
+            $this->setTtl(0);
+        }
         $e->stopPropagation();
         return $this;
     }

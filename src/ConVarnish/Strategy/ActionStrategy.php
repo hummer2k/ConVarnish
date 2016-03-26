@@ -1,6 +1,6 @@
 <?php
 /**
- * @package
+ * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
 
@@ -24,7 +24,7 @@ class ActionStrategy extends AbstractCachingStrategy
         $ttl = $this->getTtlFor($cacheableActions, $fullAction);
 
         if (false !== $ttl) {
-            $this->ttl = $ttl;
+            $this->setTtl($ttl);
             $e->stopPropagation();
             return $this;
         }

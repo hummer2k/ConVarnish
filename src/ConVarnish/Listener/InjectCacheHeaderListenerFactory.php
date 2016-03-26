@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package ConVarnish
+ * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
+ */
+
 namespace ConVarnish\Listener;
 
 use ConLayout\Updater\LayoutUpdaterInterface;
@@ -7,10 +12,6 @@ use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-/**
- * @package ConVarnish
- * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
- */
 class InjectCacheHeaderListenerFactory implements FactoryInterface
 {
     /**

@@ -18,7 +18,7 @@ class EsiStrategy extends AbstractCachingStrategy
         $viewModel = $e->getViewModel();
         $esiOptions = (array) $viewModel->getOption('esi', []);
         if (isset($esiOptions['ttl'])) {
-            $this->ttl = (int) $esiOptions['ttl'];
+            $this->setTtl($esiOptions['ttl']);
             $e->stopPropagation();
             return $this;
         }

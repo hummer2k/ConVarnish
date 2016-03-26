@@ -21,7 +21,7 @@ class RouteStrategy extends AbstractCachingStrategy
         $ttl             = $this->getTtlFor($cacheableRoutes, $routeName);
 
         if (false !== $ttl) {
-            $this->ttl = $ttl;
+            $this->setTtl($ttl);
             $e->stopPropagation();
             return $this;
         }

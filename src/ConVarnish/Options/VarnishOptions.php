@@ -1,12 +1,13 @@
 <?php
-namespace ConVarnish\Options;
-
-use Zend\Stdlib\AbstractOptions;
-
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
  */
+
+namespace ConVarnish\Options;
+
+use Zend\Stdlib\AbstractOptions;
+
 class VarnishOptions extends AbstractOptions
 {
     const POLICY_ALLOW = 'allow';

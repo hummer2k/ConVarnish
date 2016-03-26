@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package ConVarnish
+ * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
+ */
+
 namespace ConVarnish\Listener;
 
 use ConLayout\Block\Factory\BlockFactory;
@@ -18,10 +23,6 @@ use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ModelInterface;
 use Zend\View\Model\ViewModel;
 
-/**
- * @package ConVarnish
- * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
- */
 class InjectCacheHeaderListener implements
     ListenerAggregateInterface,
     EventManagerAwareInterface
@@ -164,7 +165,7 @@ class InjectCacheHeaderListener implements
         }
         $headers->addHeader($cacheControl);
 
-        $this->ttl = $ttl;
+        $this->setTtl($ttl);
     }
 
     /**
