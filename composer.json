@@ -37,8 +37,13 @@
         "hummer2k/conlayout": "To use ESI processing feature."
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "ConVarnish\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ConVarnishTest\\": "tests/"
         }
     }
 }

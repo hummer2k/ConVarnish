@@ -21,8 +21,7 @@ use Zend\Mvc\MvcEvent;
 class Module implements
     ConfigProviderInterface,
     ServiceProviderInterface,
-    BootstrapListenerInterface,
-    AutoloaderProviderInterface
+    BootstrapListenerInterface
 {
     /**
      * retrieve module config
@@ -32,8 +31,8 @@ class Module implements
     public function getConfig()
     {
         return array_merge(
-            include __DIR__ . '/../../config/module.config.php',
-            include __DIR__ . '/../../config/con-varnish.global.php.dist'
+            include __DIR__ . '/../config/module.config.php',
+            include __DIR__ . '/../config/con-varnish.global.php.dist'
         );
     }
 
@@ -43,11 +42,12 @@ class Module implements
      */
     public function getServiceConfig()
     {
-        return include __DIR__ . '/../../config/service.config.php';
+        return include __DIR__ . '/../config/service.config.php';
     }
 
     /**
      * @param EventInterface $e
+     * @return array|void
      */
     public function onBootstrap(EventInterface $e)
     {
@@ -74,22 +74,5 @@ class Module implements
         foreach ($cachingStrategies as $cachingStrategy => $priority) {
             $serviceManager->get($cachingStrategy)->attach($eventManager, $priority);
         }
-
-    }
-
-    /**
-     * retrieve autoloader config
-     *
-     * @return array
-     */
-    public function getAutoloaderConfig()
-    {
-        return [
-            'Zend\Loader\StandardAutoloader' => [
-                'namespaces' => [
-                    __NAMESPACE__ => __DIR__
-                ],
-            ],
-        ];
     }
 }
