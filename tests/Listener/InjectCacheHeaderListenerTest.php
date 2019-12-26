@@ -2,7 +2,6 @@
 
 namespace ConVarnishTest\Listener;
 
-use ConLayout\Listener\ActionHandlesListener;
 use ConLayout\Updater\LayoutUpdater;
 use ConLayout\Updater\LayoutUpdaterInterface;
 use ConVarnish\Listener\InjectCacheHeaderListener;
@@ -13,7 +12,6 @@ use ConVarnish\Strategy\DefaultStrategy;
 use ConVarnish\Strategy\EsiStrategy;
 use ConVarnish\Strategy\RouteStrategy;
 use ConVarnishTest\AbstractTest;
-use ConVarnishTest\Bootstrap;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManager;
@@ -50,7 +48,7 @@ class InjectCacheHeaderListenerTest extends AbstractTest
      */
     protected $eventManager;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->varnishOptions = new VarnishOptions();
         $this->varnishOptions->setCacheEnabled(true);
@@ -64,13 +62,6 @@ class InjectCacheHeaderListenerTest extends AbstractTest
         $this->attachStrategy(DefaultStrategy::class, 100);
         $this->listener->setEventManager($this->eventManager);
         $this->createMvcEvent();
-    }
-
-    public function testAttachDefault()
-    {
-        $this->listener->attach($this->eventManager);
-        $listeners = $this->eventManager->getListeners(MvcEvent::EVENT_DISPATCH);
-        $this->assertCount(1, $listeners);
     }
 
     public function testInjectCacheHeaderDefault()

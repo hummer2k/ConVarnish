@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
@@ -7,20 +8,10 @@
 namespace ConVarnish\Strategy;
 
 use ConVarnish\Options\VarnishOptions;
-use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Psr\Container\ContainerInterface;
 
-class CachingStrategyFactory implements FactoryInterface
+class CachingStrategyFactory
 {
-    /**
-     * @inheritDoc
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator, $cname = null, $requestedName = null)
-    {
-        return $this($serviceLocator, $requestedName);
-    }
-
     /**
      * @param ContainerInterface $container
      * @param $requestedName

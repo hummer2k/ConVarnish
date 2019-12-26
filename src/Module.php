@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
@@ -10,13 +11,10 @@ use ConVarnish\Listener\InjectCacheHeaderListener;
 use ConVarnish\Listener\InjectTagsHeaderListener;
 use ConVarnish\Options\VarnishOptions;
 use Zend\EventManager\EventInterface;
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\Console\Console;
 use Zend\Mvc\Application;
-use Zend\Mvc\MvcEvent;
 
 class Module implements
     ConfigProviderInterface,
@@ -51,7 +49,7 @@ class Module implements
      */
     public function onBootstrap(EventInterface $e)
     {
-        if (Console::isConsole()) {
+        if (PHP_SAPI == 'cli') {
             return;
         }
         /* @var $application Application */

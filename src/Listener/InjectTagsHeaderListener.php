@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
@@ -17,9 +18,9 @@ use Zend\View\Model\ViewModel;
 
 class InjectTagsHeaderListener implements ListenerAggregateInterface
 {
-    const OPTION_CACHE_TAGS = 'cache_tags';
-
     use ListenerAggregateTrait;
+
+    public const OPTION_CACHE_TAGS = 'cache_tags';
 
     /**
      *
@@ -30,13 +31,14 @@ class InjectTagsHeaderListener implements ListenerAggregateInterface
     /**
      *
      * @param EventManagerInterface $events
+     * @param int $priority
      */
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = -9000)
     {
         $this->listeners[] = $events->attach(
             MvcEvent::EVENT_RENDER,
             [$this, 'injectTagsHeader'],
-            -9000
+            $priority
         );
     }
 

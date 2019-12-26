@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
@@ -10,9 +11,9 @@ use Zend\Http\Response;
 
 interface VarnishServiceInterface
 {
-    const VARNISH_HEADER_HOST = 'X-Ban-Host';
-    const VARNISH_HEADER_URL  = 'X-Ban-URL';
-    const VARNISH_HEADER_TAGS = 'X-Ban-Tags';
+    public const VARNISH_HEADER_HOST = 'X-Ban-Host';
+    public const VARNISH_HEADER_URL  = 'X-Ban-URL';
+    public const VARNISH_HEADER_TAGS = 'X-Ban-Tags';
 
     /**
      * main method to add bans to varnish's ban list

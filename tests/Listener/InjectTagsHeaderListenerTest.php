@@ -22,17 +22,10 @@ class InjectTagsHeaderListenerTest extends AbstractTest
      */
     protected $listener;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->listener = new InjectTagsHeaderListener();
-    }
-
-    public function testAttach()
-    {
-        $em = new EventManager();
-        $this->listener->attach($em);
-        $this->assertCount(1, $em->getListeners(MvcEvent::EVENT_RENDER));
     }
 
     public function testInjectTagsHeader()

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
@@ -8,62 +9,62 @@ namespace ConVarnish\Options;
 
 use Zend\Stdlib\AbstractOptions;
 
-class VarnishOptions extends AbstractOptions
+final class VarnishOptions extends AbstractOptions
 {
-    const POLICY_ALLOW = 'allow';
-    const POLICY_DENY  = 'deny';
+    public const POLICY_ALLOW = 'allow';
+    public const POLICY_DENY  = 'deny';
 
     /**
      * @var string
      */
-    protected $policy = self::POLICY_ALLOW;
+    private $policy = self::POLICY_ALLOW;
 
     /**
      *
      * @var boolean
      */
-    protected $cacheEnabled = false;
+    private $cacheEnabled = false;
 
     /**
      *
      * @var integer
      */
-    protected $defaultTtl = 14400;
+    private $defaultTtl = 14400;
 
     /**
      * @var array
      */
-    protected $cacheableActions = [];
+    private $cacheableActions = [];
 
     /**
      *
      * @var array
      */
-    protected $cacheableRoutes = [];
+    private $cacheableRoutes = [];
 
     /**
      *
      * @var boolean
      */
-    protected $debug = false;
+    private $debug = false;
 
     /**
      * varnish cache instances
      *
      * @var array
      */
-    protected $servers = [];
+    private $servers = [];
 
     /**
      *
      * @var bool
      */
-    protected $useEsi = false;
+    private $useEsi = false;
 
     /**
      * @var array
      */
-    protected $cachingStrategies = [];
+    private $cachingStrategies = [];
 
     /**
      *

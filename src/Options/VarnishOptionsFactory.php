@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
@@ -6,11 +7,10 @@
 
 namespace ConVarnish\Options;
 
-use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Psr\Container\ContainerInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class VarnishOptionsFactory implements FactoryInterface
+class VarnishOptionsFactory
 {
     /**
      *

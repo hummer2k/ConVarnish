@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
@@ -50,7 +51,7 @@ class VarnishService implements VarnishServiceInterface
             $client->getRequest()->setAllowCustomMethods(true);
             $client->setMethod('BAN');
             $client->setHeaders([
-                self::VARNISH_HEADER_HOST => '^('.$hostname.')$',
+                self::VARNISH_HEADER_HOST => '^(' . $hostname . ')$',
                 $type => $pattern,
             ]);
             $info[$serverName] = $client->send();

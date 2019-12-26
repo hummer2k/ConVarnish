@@ -1,28 +1,32 @@
 <?php
 
+use ConVarnish\Listener\InjectCacheHeaderListener;
+use ConVarnish\Listener\InjectCacheHeaderListenerFactory;
+use ConVarnish\Listener\InjectTagsHeaderListener;
+use ConVarnish\Options\VarnishOptions;
+use ConVarnish\Options\VarnishOptionsFactory;
+use ConVarnish\Service\VarnishService;
+use ConVarnish\Service\VarnishServiceFactory;
+use ConVarnish\Service\VarnishServiceInterface;
+use ConVarnish\Strategy\ActionStrategy;
+use ConVarnish\Strategy\CachingStrategyFactory;
+use ConVarnish\Strategy\DefaultStrategy;
+use ConVarnish\Strategy\EsiStrategy;
+use ConVarnish\Strategy\RouteStrategy;
+use Zend\ServiceManager\Factory\InvokableFactory;
+
 return [
     'factories' => [
-        \ConVarnish\Listener\InjectCacheHeaderListener::class
-            => \ConVarnish\Listener\InjectCacheHeaderListenerFactory::class,
-        \ConVarnish\Service\VarnishService::class
-            => \ConVarnish\Service\VarnishServiceFactory::class,
-        \ConVarnish\Options\VarnishOptions::class
-            => \ConVarnish\Options\VarnishOptionsFactory::class,
-        \ConVarnish\Strategy\DefaultStrategy::class
-            => \ConVarnish\Strategy\CachingStrategyFactory::class,
-        \ConVarnish\Strategy\ActionStrategy::class
-            => \ConVarnish\Strategy\CachingStrategyFactory::class,
-        \ConVarnish\Strategy\RouteStrategy::class
-            => \ConVarnish\Strategy\CachingStrategyFactory::class,
-        \ConVarnish\Strategy\EsiStrategy::class
-            => \ConVarnish\Strategy\CachingStrategyFactory::class
-    ],
-    'invokables' => [
-        \ConVarnish\Listener\InjectTagsHeaderListener::class
-            => \ConVarnish\Listener\InjectTagsHeaderListener::class
+        InjectCacheHeaderListener::class => InjectCacheHeaderListenerFactory::class,
+        VarnishService::class => VarnishServiceFactory::class,
+        VarnishOptions::class => VarnishOptionsFactory::class,
+        DefaultStrategy::class => CachingStrategyFactory::class,
+        ActionStrategy::class => CachingStrategyFactory::class,
+        RouteStrategy::class => CachingStrategyFactory::class,
+        EsiStrategy::class => CachingStrategyFactory::class,
+        InjectTagsHeaderListener::class => InvokableFactory::class
     ],
     'aliases' => [
-        \ConVarnish\Service\VarnishServiceInterface::class
-            => \ConVarnish\Service\VarnishService::class
+        VarnishServiceInterface::class => VarnishService::class
     ]
 ];

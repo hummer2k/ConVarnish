@@ -47,7 +47,7 @@ return [
         /**
          * set ttl per matched route name
          *
-         * use false as ttl to disable caching for this route
+         * use false as ttl to disable caching for that route
          *
          * suports wildcard (*)
          *

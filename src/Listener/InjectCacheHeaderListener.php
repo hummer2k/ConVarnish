@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package ConVarnish
  * @author Cornelius Adams (conlabz GmbH) <cornelius.adams@conlabz.de>
@@ -27,12 +28,12 @@ class InjectCacheHeaderListener implements
     ListenerAggregateInterface,
     EventManagerAwareInterface
 {
-    const HEADER_CACHE_DEBUG = 'X-Cache-Debug';
-    const ESI_TEMPLATE = 'con-varnish/esi';
-    const EVENT_DETERMINE_TTL = 'determine_ttl';
-
     use ListenerAggregateTrait;
     use EventManagerAwareTrait;
+
+    public const HEADER_CACHE_DEBUG = 'X-Cache-Debug';
+    public const ESI_TEMPLATE = 'con-varnish/esi';
+    public const EVENT_DETERMINE_TTL = 'determine_ttl';
 
     /**
      *
@@ -99,15 +100,17 @@ class InjectCacheHeaderListener implements
     /**
      *
      * @param EventManagerInterface $events
+     * @param int $priority
      */
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = -10)
     {
         $this->listeners[] = $events->attach(
             MvcEvent::EVENT_DISPATCH,
             [$this, 'injectCacheHeader'],
-            -10
+            $priority
         );
-        if ($this->varnishOptions->isCacheEnabled() &&
+        if (
+            $this->varnishOptions->isCacheEnabled() &&
             $this->varnishOptions->useEsi()
         ) {
             $events->attach(MvcEvent::EVENT_DISPATCH, [$this, 'determineEsiProcessing'], -15);
@@ -130,11 +133,11 @@ class InjectCacheHeaderListener implements
         $cacheEvent->setName(self::EVENT_DETERMINE_TTL);
 
         if ($this->varnishOptions->isCacheEnabled()) {
-            $result = $this->getEventManager()->trigger(
-                $cacheEvent,
+            $result = $this->getEventManager()->triggerEventUntil(
                 function ($result) {
                     return $result instanceof CachingStrategyInterface;
-                }
+                },
+                $cacheEvent
             );
             /** @var CachingStrategyInterface $strategy */
             $strategy = $result->last();
@@ -176,7 +179,8 @@ class InjectCacheHeaderListener implements
     {
         $requestHeaders = $e->getRequest()->getHeaders();
         $this->responseHeaders = $e->getResponse()->getHeaders();
-        if (($this->ttl > 0) &&
+        if (
+            ($this->ttl > 0) &&
             $requestHeaders->has('Surrogate-Capability') &&
             false !== strpos($requestHeaders->get('Surrogate-Capability')->getFieldValue(), 'ESI/1.0') &&
             $e->getRouteMatch()->getMatchedRouteName() !== 'esi'

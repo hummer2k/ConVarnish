@@ -21,11 +21,12 @@ class VarnishServiceTest extends AbstractTest
      */
     protected $service;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
-        $this->service = Bootstrap::getServiceManager()
-            ->get('ConVarnish\Service\VarnishService');
+        $this->service = new VarnishService([
+
+        ]);
         $this->adapter = new Test();
         $this->service->getClient()->setAdapter($this->adapter);
     }
