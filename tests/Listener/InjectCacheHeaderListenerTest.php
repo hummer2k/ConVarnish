@@ -194,7 +194,6 @@ class InjectCacheHeaderListenerTest extends AbstractTest
             InjectCacheHeaderListener::ESI_TEMPLATE,
             $block->getTemplate()
         );
-
     }
 
     public function testStrategyPriorities()

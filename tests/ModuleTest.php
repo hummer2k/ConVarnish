@@ -23,7 +23,6 @@ class ModuleTest extends AbstractTest
 
     public function testGetConfigs()
     {
-        $this->assertInternalType('array', $this->module->getAutoloaderConfig());
         $this->assertInternalType('array', $this->module->getConfig());
         $this->assertInternalType('array', $this->module->getServiceConfig());
     }
