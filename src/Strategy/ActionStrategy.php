@@ -7,7 +7,7 @@
 
 namespace ConVarnish\Strategy;
 
-use Zend\Mvc\MvcEvent;
+use Laminas\Mvc\MvcEvent;
 
 class ActionStrategy extends AbstractCachingStrategy
 {

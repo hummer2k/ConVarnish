@@ -8,7 +8,7 @@
 namespace ConVarnish\Strategy;
 
 use ConVarnish\Options\VarnishOptions;
-use Zend\Mvc\MvcEvent;
+use Laminas\Mvc\MvcEvent;
 
 class DefaultStrategy extends AbstractCachingStrategy
 {

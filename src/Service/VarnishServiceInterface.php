@@ -7,7 +7,7 @@
 
 namespace ConVarnish\Service;
 
-use Zend\Http\Response;
+use Laminas\Http\Response;
 
 interface VarnishServiceInterface
 {

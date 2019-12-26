@@ -5,10 +5,10 @@ namespace ConVarnishTest\Listener;
 use ConVarnish\Listener\InjectTagsHeaderListener;
 use ConVarnish\Service\VarnishService;
 use ConVarnishTest\AbstractTest;
-use Zend\EventManager\EventManager;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Mvc\MvcEvent;
-use Zend\View\Model\ViewModel;
+use Laminas\EventManager\EventManager;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Mvc\MvcEvent;
+use Laminas\View\Model\ViewModel;
 
 /**
  * @package ConVarnish

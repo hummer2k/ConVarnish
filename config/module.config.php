@@ -2,7 +2,7 @@
 
 use ConVarnish\Controller\EsiController;
 use ConVarnish\View\Helper\EsiUrl;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'view_manager' => [

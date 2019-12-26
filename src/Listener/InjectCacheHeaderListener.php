@@ -11,18 +11,18 @@ use ConLayout\Block\Factory\BlockFactory;
 use ConLayout\Updater\LayoutUpdaterInterface;
 use ConVarnish\Options\VarnishOptions;
 use ConVarnish\Strategy\CachingStrategyInterface;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerAwareTrait;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Http\Header\CacheControl;
-use Zend\Http\Header\GenericHeader;
-use Zend\Http\Headers;
-use Zend\Mvc\MvcEvent;
-use Zend\View\Model\ModelInterface;
-use Zend\View\Model\ViewModel;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerAwareInterface;
+use Laminas\EventManager\EventManagerAwareTrait;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Http\Header\CacheControl;
+use Laminas\Http\Header\GenericHeader;
+use Laminas\Http\Headers;
+use Laminas\Mvc\MvcEvent;
+use Laminas\View\Model\ModelInterface;
+use Laminas\View\Model\ViewModel;
 
 class InjectCacheHeaderListener implements
     ListenerAggregateInterface,

@@ -8,13 +8,13 @@
 namespace ConVarnish\Listener;
 
 use ConVarnish\Service\VarnishService;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Http\Header\GenericHeader;
-use Zend\Mvc\MvcEvent;
-use Zend\Stdlib\ArrayUtils;
-use Zend\View\Model\ViewModel;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Http\Header\GenericHeader;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\View\Model\ViewModel;
 
 class InjectTagsHeaderListener implements ListenerAggregateInterface
 {

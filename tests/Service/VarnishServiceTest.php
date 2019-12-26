@@ -5,7 +5,7 @@ namespace ConVarnishTest\Service;
 use ConVarnish\Service\VarnishService;
 use ConVarnishTest\AbstractTest;
 use ConVarnishTest\Bootstrap;
-use Zend\Http\Client\Adapter\Test;
+use Laminas\Http\Client\Adapter\Test;
 
 /**
  * @package ConVarnish
@@ -34,24 +34,24 @@ class VarnishServiceTest extends AbstractTest
     public function testBan()
     {
         $result = $this->service->ban('example.com');
-        $this->assertContainsOnlyInstancesOf('Zend\Http\Response', $result);
+        $this->assertContainsOnlyInstancesOf('Laminas\Http\Response', $result);
     }
 
     public function testBanUri()
     {
         $result = $this->service->banUri('example.com', '/');
-        $this->assertContainsOnlyInstancesOf('Zend\Http\Response', $result);
+        $this->assertContainsOnlyInstancesOf('Laminas\Http\Response', $result);
     }
 
     public function testBanTags()
     {
         $result = $this->service->banTags('example.com', 'tag1,tag2,tag3');
-        $this->assertContainsOnlyInstancesOf('Zend\Http\Response', $result);
+        $this->assertContainsOnlyInstancesOf('Laminas\Http\Response', $result);
     }
 
     public function testBanTagsArray()
     {
         $result = $this->service->banTags('example.com', ['tag1', 'tag2', 'tag3']);
-        $this->assertContainsOnlyInstancesOf('Zend\Http\Response', $result);
+        $this->assertContainsOnlyInstancesOf('Laminas\Http\Response', $result);
     }
 }

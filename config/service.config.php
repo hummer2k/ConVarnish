@@ -13,7 +13,7 @@ use ConVarnish\Strategy\CachingStrategyFactory;
 use ConVarnish\Strategy\DefaultStrategy;
 use ConVarnish\Strategy\EsiStrategy;
 use ConVarnish\Strategy\RouteStrategy;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'factories' => [

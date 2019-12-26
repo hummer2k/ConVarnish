@@ -12,11 +12,11 @@ use ConVarnish\Strategy\DefaultStrategy;
 use ConVarnish\Strategy\EsiStrategy;
 use ConVarnish\Strategy\RouteStrategy;
 use ConVarnishTest\AbstractTest;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManager;
-use Zend\Mvc\MvcEvent;
-use Zend\View\Model\ViewModel;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManager;
+use Laminas\Mvc\MvcEvent;
+use Laminas\View\Model\ViewModel;
 
 /**
  * @package ConVarnish

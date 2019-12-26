@@ -3,9 +3,9 @@
 namespace ConVarnishTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Http\PhpEnvironment\Request;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Mvc\MvcEvent;
+use Laminas\Http\PhpEnvironment\Request;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Mvc\MvcEvent;
 
 /**
  * @package ConVarnish
@@ -23,7 +23,7 @@ abstract class AbstractTest extends TestCase
         $this->mvcEvent = new MvcEvent();
         $request = new Request();
         $response = new Response();
-        $routeMatch = new \Zend\Router\Http\RouteMatch([]);
+        $routeMatch = new \Laminas\Router\Http\RouteMatch([]);
         $routeMatch->setMatchedRouteName('test/route');
         $routeMatch->setParam('controller', 'Application\Controller\Index');
         $routeMatch->setParam('action', 'index');

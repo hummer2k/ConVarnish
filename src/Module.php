@@ -10,11 +10,11 @@ namespace ConVarnish;
 use ConVarnish\Listener\InjectCacheHeaderListener;
 use ConVarnish\Listener\InjectTagsHeaderListener;
 use ConVarnish\Options\VarnishOptions;
-use Zend\EventManager\EventInterface;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\Mvc\Application;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ServiceProviderInterface;
+use Laminas\Mvc\Application;
 
 class Module implements
     ConfigProviderInterface,

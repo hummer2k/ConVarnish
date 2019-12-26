@@ -10,8 +10,8 @@ namespace ConVarnish\Controller;
 use ConLayout\Controller\Plugin\LayoutManager;
 use ConLayout\Generator\BlocksGenerator;
 use ConLayout\Handle\Handle;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 class EsiController extends AbstractActionController
 {

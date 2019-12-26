@@ -2,10 +2,10 @@
 // @codingStandardsIgnoreFile
 namespace ConVarnishTest;
 
-use Zend\Loader\AutoloaderFactory;
-use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Loader\AutoloaderFactory;
+use Laminas\Mvc\Service\ServiceManagerConfig;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Stdlib\ArrayUtils;
 use RuntimeException;
 
 error_reporting(E_ALL | E_STRICT);
@@ -89,7 +89,7 @@ class Bootstrap
         }
 
         AutoloaderFactory::factory(array(
-            'Zend\Loader\StandardAutoloader' => array(
+            'Laminas\Loader\StandardAutoloader' => array(
                 'autoregister_zf' => true,
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,

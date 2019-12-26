@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9cec24c566e93acc5c1a56d44cec161",
+    "content-hash": "fdaaf7cdbe4acfc53d2d2457d421817c",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -37,6 +37,1485 @@
             "homepage": "https://github.com/container-interop/container-interop",
             "abandoned": "psr/container",
             "time": "2017-02-14T19:40:03+00:00"
+        },
+        {
+            "name": "laminas/laminas-config",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-config",
+                "reference": "9868540778f6a3047eb1a857c6d92146e1dac775"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-config/laminas-laminas-config-2.6.0-00984a.tar",
+                "reference": "9868540778f6a3047eb1a857c6d92146e1dac775",
+                "shasum": "ba3c453f19a37a5d2fc72fda6e357f2f7b4040f3"
+            },
+            "require": {
+                "laminas/laminas-stdlib": "^2.7 || ^3.0",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.5 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-config": "self.version"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.7.*",
+                "laminas/laminas-filter": "^2.6",
+                "laminas/laminas-i18n": "^2.5",
+                "laminas/laminas-json": "^2.6.1",
+                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "laminas/laminas-filter": "Laminas\\Filter component",
+                "laminas/laminas-i18n": "Laminas\\I18n component",
+                "laminas/laminas-json": "Laminas\\Json to use the Json reader or writer classes",
+                "laminas/laminas-servicemanager": "Laminas\\ServiceManager for use with the Config Factory to retrieve reader and writer instances"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Config\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Config\\": "test/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides a nested object property based user interface for accessing this configuration data within application code",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "config",
+                "laminas"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-config/",
+                "issues": "https://github.com/laminas/laminas-config/issues",
+                "source": "https://github.com/laminas/laminas-config",
+                "rss": "https://github.com/laminas/laminas-config/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T18:32:11+00:00"
+        },
+        {
+            "name": "laminas/laminas-console",
+            "version": "2.8.0",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-console",
+                "reference": "5226b00ef61785c046d2044abb82d76601e06ddf"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-console/laminas-laminas-console-2.8.0-76579f.tar",
+                "reference": "5226b00ef61785c046d2044abb82d76601e06ddf",
+                "shasum": "de87397e6c39310f34398b50b1a5394c2ad399a5"
+            },
+            "require": {
+                "laminas/laminas-stdlib": "^3.2.1",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-console": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-filter": "^2.7.2",
+                "laminas/laminas-json": "^2.6 || ^3.0",
+                "laminas/laminas-validator": "^2.10.1",
+                "phpunit/phpunit": "^5.7.23 || ^6.4.3"
+            },
+            "suggest": {
+                "laminas/laminas-filter": "To support DefaultRouteMatcher usage",
+                "laminas/laminas-validator": "To support DefaultRouteMatcher usage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8.x-dev",
+                    "dev-develop": "2.9.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Console\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Console\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Build console applications using getopt syntax or routing, complete with prompts",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "console",
+                "laminas"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-console/",
+                "issues": "https://github.com/laminas/laminas-console/issues",
+                "source": "https://github.com/laminas/laminas-console",
+                "rss": "https://github.com/laminas/laminas-console/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T18:33:49+00:00"
+        },
+        {
+            "name": "laminas/laminas-dependency-plugin",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-dependency-plugin.git",
+                "reference": "deeda02b6ea8494735de3d78effe65d671d0e513"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-dependency-plugin/zipball/deeda02b6ea8494735de3d78effe65d671d0e513",
+                "reference": "deeda02b6ea8494735de3d78effe65d671d0e513",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.9",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "phpcompatibility/php-compatibility": "^9.3",
+                "phpunit/phpunit": "^8.4",
+                "roave/security-advisories": "dev-master",
+                "webimpress/coding-standard": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Laminas\\DependencyPlugin\\DependencyRewriterPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\DependencyPlugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Replace zendframework and zfcampus packages with their Laminas Project equivalents.",
+            "time": "2019-12-02T16:44:48+00:00"
+        },
+        {
+            "name": "laminas/laminas-escaper",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-escaper",
+                "reference": "fa842958433b7e3caad1b28611c41932111bc722"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-escaper/laminas-laminas-escaper-2.6.1-b303e8.tar",
+                "reference": "fa842958433b7e3caad1b28611c41932111bc722",
+                "shasum": "209c09a53a0759f6d2560b6ed405861c4953bb1e"
+            },
+            "require": {
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-escaper": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6.x-dev",
+                    "dev-develop": "2.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Escaper\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Escaper\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Securely and safely escape HTML, HTML attributes, JavaScript, CSS, and URLs",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "escaper",
+                "laminas"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-escaper/",
+                "issues": "https://github.com/laminas/laminas-escaper/issues",
+                "source": "https://github.com/laminas/laminas-escaper",
+                "rss": "https://github.com/laminas/laminas-escaper/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T18:46:56+00:00"
+        },
+        {
+            "name": "laminas/laminas-eventmanager",
+            "version": "3.2.1",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-eventmanager",
+                "reference": "083ee34231eb5298689f2de41d3f3f81c97df6a8"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-eventmanager/laminas-laminas-eventmanager-3.2.1-7d1ef3.tar",
+                "reference": "083ee34231eb5298689f2de41d3f3f81c97df6a8",
+                "shasum": "926d582aadbbd2677103ed2542411e7ca28900c3"
+            },
+            "require": {
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-eventmanager": "self.version"
+            },
+            "require-dev": {
+                "athletic/athletic": "^0.1",
+                "container-interop/container-interop": "^1.1.0",
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-stdlib": "^2.7.3 || ^3.0",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2"
+            },
+            "suggest": {
+                "container-interop/container-interop": "^1.1.0, to use the lazy listeners feature",
+                "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev",
+                    "dev-develop": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\EventManager\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\EventManager\\": "test/",
+                    "LaminasBench\\EventManager\\": "benchmarks/"
+                },
+                "files": [
+                    "test/_autoload.php"
+                ]
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Trigger and listen to events within a PHP application",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "event",
+                "eventmanager",
+                "events",
+                "laminas"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-eventmanager/",
+                "issues": "https://github.com/laminas/laminas-eventmanager/issues",
+                "source": "https://github.com/laminas/laminas-eventmanager",
+                "rss": "https://github.com/laminas/laminas-eventmanager/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T18:48:10+00:00"
+        },
+        {
+            "name": "laminas/laminas-http",
+            "version": "2.11.1",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-http",
+                "reference": "e73fc41860619df1fce29830def706348891e4d4"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-http/laminas-laminas-http-2.11.1-852847.tar",
+                "reference": "e73fc41860619df1fce29830def706348891e4d4",
+                "shasum": "5f0061ce303b5b6d949380a984d6dbd6e86494bf"
+            },
+            "require": {
+                "laminas/laminas-loader": "^2.5.1",
+                "laminas/laminas-stdlib": "^3.2.1",
+                "laminas/laminas-uri": "^2.5.2",
+                "laminas/laminas-validator": "^2.10.1",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-http": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-config": "^3.1 || ^2.6",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.3"
+            },
+            "suggest": {
+                "paragonie/certainty": "For automated management of cacert.pem"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.11.x-dev",
+                    "dev-develop": "2.12.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Http\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Http\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Provides an easy interface for performing Hyper-Text Transfer Protocol (HTTP) requests",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "HTTP client",
+                "http",
+                "laminas"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-http/",
+                "issues": "https://github.com/laminas/laminas-http/issues",
+                "source": "https://github.com/laminas/laminas-http",
+                "rss": "https://github.com/laminas/laminas-http/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:04:59+00:00"
+        },
+        {
+            "name": "laminas/laminas-json",
+            "version": "3.1.2",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-json",
+                "reference": "519757f4a0d3f64831c4078c0adf1cc2033fdf0e"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-json/laminas-laminas-json-3.1.2-2a7e26.tar",
+                "reference": "519757f4a0d3f64831c4078c0adf1cc2033fdf0e",
+                "shasum": "c94292955a2f80bcf4b6624dfaf8b03ac88c18c9"
+            },
+            "require": {
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-json": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-stdlib": "^2.7.7 || ^3.1",
+                "phpunit/phpunit": "^5.7.23 || ^6.4.3"
+            },
+            "suggest": {
+                "laminas/laminas-json-server": "For implementing JSON-RPC servers",
+                "laminas/laminas-xml2json": "For converting XML documents to JSON"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev",
+                    "dev-develop": "3.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Json\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Json\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "json",
+                "laminas"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-json/",
+                "issues": "https://github.com/laminas/laminas-json/issues",
+                "source": "https://github.com/laminas/laminas-json",
+                "rss": "https://github.com/laminas/laminas-json/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:17:09+00:00"
+        },
+        {
+            "name": "laminas/laminas-loader",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-loader",
+                "reference": "8e6157fa2e1ecd7fa2bed5ade08732d81b0845a8"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-loader/laminas-laminas-loader-2.6.1-46d678.tar",
+                "reference": "8e6157fa2e1ecd7fa2bed5ade08732d81b0845a8",
+                "shasum": "bdac8e524d5a481495611ff86e98ce1de2bc732e"
+            },
+            "require": {
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-loader": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6.x-dev",
+                    "dev-develop": "2.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Loader\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Loader\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Autoloading and plugin loading strategies",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "loader"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-loader/",
+                "issues": "https://github.com/laminas/laminas-loader/issues",
+                "source": "https://github.com/laminas/laminas-loader",
+                "rss": "https://github.com/laminas/laminas-loader/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:20:41+00:00"
+        },
+        {
+            "name": "laminas/laminas-modulemanager",
+            "version": "2.8.4",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-modulemanager",
+                "reference": "799f65f7bae1ddd74695b89c221f53d87a002e22"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-modulemanager/laminas-laminas-modulemanager-2.8.4-4fbdae.tar",
+                "reference": "799f65f7bae1ddd74695b89c221f53d87a002e22",
+                "shasum": "00173dc614ef8fea2561c556cab707243d65c705"
+            },
+            "require": {
+                "laminas/laminas-config": "^3.1 || ^2.6",
+                "laminas/laminas-eventmanager": "^3.2 || ^2.6.3",
+                "laminas/laminas-stdlib": "^3.1 || ^2.7",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-modulemanager": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-console": "^2.6",
+                "laminas/laminas-di": "^2.6",
+                "laminas/laminas-loader": "^2.5",
+                "laminas/laminas-mvc": "^3.0 || ^2.7",
+                "laminas/laminas-servicemanager": "^3.0.3 || ^2.7.5",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16"
+            },
+            "suggest": {
+                "laminas/laminas-console": "Laminas\\Console component",
+                "laminas/laminas-loader": "Laminas\\Loader component if you are not using Composer autoloading for your modules",
+                "laminas/laminas-mvc": "Laminas\\Mvc component",
+                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8.x-dev",
+                    "dev-develop": "2.9.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\ModuleManager\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "files": [
+                    "test/autoload.php",
+                    "test/TestAsset/ModuleAsClass.php"
+                ],
+                "psr-4": {
+                    "ListenerTestModule\\": "test/TestAsset/ListenerTestModule/",
+                    "ModuleAsClass\\": "test/TestAsset/ModuleAsClass/",
+                    "LaminasTest\\ModuleManager\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Modular application system for laminas-mvc applications",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "modulemanager"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-modulemanager/",
+                "issues": "https://github.com/laminas/laminas-modulemanager/issues",
+                "source": "https://github.com/laminas/laminas-modulemanager",
+                "rss": "https://github.com/laminas/laminas-modulemanager/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:29:27+00:00"
+        },
+        {
+            "name": "laminas/laminas-mvc",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-mvc",
+                "reference": "230b22c984efb34b3b3d4f97183bf9477f93e08e"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-mvc/laminas-laminas-mvc-3.1.1-6e484e.tar",
+                "reference": "230b22c984efb34b3b3d4f97183bf9477f93e08e",
+                "shasum": "4e3781c6115fc50a2884b75a7ade1c169a5495be"
+            },
+            "require": {
+                "container-interop/container-interop": "^1.2",
+                "laminas/laminas-eventmanager": "^3.2",
+                "laminas/laminas-http": "^2.7",
+                "laminas/laminas-modulemanager": "^2.8",
+                "laminas/laminas-router": "^3.0.2",
+                "laminas/laminas-servicemanager": "^3.3",
+                "laminas/laminas-stdlib": "^3.1",
+                "laminas/laminas-view": "^2.9",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-mvc": "self.version"
+            },
+            "require-dev": {
+                "http-interop/http-middleware": "^0.4.1",
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-json": "^2.6.1 || ^3.0",
+                "laminas/laminas-psr7bridge": "^1.0",
+                "laminas/laminas-stratigility": "^2.0.1",
+                "phpunit/phpunit": "^6.4.4 || ^5.7.14"
+            },
+            "suggest": {
+                "http-interop/http-middleware": "^0.4.1 to be used together with laminas-stratigility",
+                "laminas/laminas-json": "(^2.6.1 || ^3.0) To auto-deserialize JSON body content in AbstractRestfulController extensions, when json_decode is unavailable",
+                "laminas/laminas-log": "^2.9.1  To provide log functionality via LogFilterManager, LogFormatterManager, and LogProcessorManager",
+                "laminas/laminas-mvc-console": "laminas-mvc-console provides the ability to expose laminas-mvc as a console application",
+                "laminas/laminas-mvc-i18n": "laminas-mvc-i18n provides integration with laminas-i18n, including a translation bridge and translatable route segments",
+                "laminas/laminas-mvc-plugin-fileprg": "To provide Post/Redirect/Get functionality around forms that container file uploads",
+                "laminas/laminas-mvc-plugin-flashmessenger": "To provide flash messaging capabilities between requests",
+                "laminas/laminas-mvc-plugin-identity": "To access the authenticated identity (per laminas-authentication) in controllers",
+                "laminas/laminas-mvc-plugin-prg": "To provide Post/Redirect/Get functionality within controllers",
+                "laminas/laminas-paginator": "^2.7 To provide pagination functionality via PaginatorPluginManager",
+                "laminas/laminas-psr7bridge": "(^0.2) To consume PSR-7 middleware within the MVC workflow",
+                "laminas/laminas-servicemanager-di": "laminas-servicemanager-di provides utilities for integrating laminas-di and laminas-servicemanager in your laminas-mvc application",
+                "laminas/laminas-stratigility": "laminas-stratigility is required to use middleware pipes in the MiddlewareListener"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev",
+                    "dev-develop": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Mvc\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Mvc\\": "test/"
+                },
+                "files": [
+                    "test/_autoload.php"
+                ]
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ],
+                "upload-coverage": [
+                    "coveralls -v"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Laminas's event-driven MVC layer, including MVC Applications, Controllers, and Plugins",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "mvc"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-mvc/",
+                "issues": "https://github.com/laminas/laminas-mvc/issues",
+                "source": "https://github.com/laminas/laminas-mvc",
+                "rss": "https://github.com/laminas/laminas-mvc/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:35:42+00:00"
+        },
+        {
+            "name": "laminas/laminas-router",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-router",
+                "reference": "3fd827dd03db9ac1cf77a110126335c2b8d33dad"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-router/laminas-laminas-router-3.3.0-ad79fd.tar",
+                "reference": "3fd827dd03db9ac1cf77a110126335c2b8d33dad",
+                "shasum": "a79b03044e36023e715df4cb4d88e000741ef31e"
+            },
+            "require": {
+                "container-interop/container-interop": "^1.2",
+                "laminas/laminas-http": "^2.8.1",
+                "laminas/laminas-servicemanager": "^2.7.8 || ^3.3",
+                "laminas/laminas-stdlib": "^3.2.1",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "conflict": {
+                "laminas/laminas-mvc": "<3.0.0"
+            },
+            "replace": {
+                "zendframework/zend-router": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-i18n": "^2.7.4",
+                "phpunit/phpunit": "^5.7.22 || ^6.4.1"
+            },
+            "suggest": {
+                "laminas/laminas-i18n": "^2.7.4, if defining translatable HTTP path segments"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev",
+                    "dev-develop": "4.0.x-dev"
+                },
+                "laminas": {
+                    "component": "Laminas\\Router",
+                    "config-provider": "Laminas\\Router\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Router\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Router\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Flexible routing system for HTTP and console applications",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "mvc",
+                "routing"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-router/",
+                "issues": "https://github.com/laminas/laminas-router/issues",
+                "source": "https://github.com/laminas/laminas-router",
+                "rss": "https://github.com/laminas/laminas-router/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:44:09+00:00"
+        },
+        {
+            "name": "laminas/laminas-servicemanager",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-servicemanager",
+                "reference": "4d1f97a69abf5bd4473662ef2a5f1c191b7f2002"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-servicemanager/laminas-laminas-servicemanager-3.4.0-742581.tar",
+                "reference": "4d1f97a69abf5bd4473662ef2a5f1c191b7f2002",
+                "shasum": "b6a96fc91ca0c3628d7b143b74deec61c4aaa8d1"
+            },
+            "require": {
+                "container-interop/container-interop": "^1.2",
+                "laminas/laminas-stdlib": "^3.2.1",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0",
+                "psr/container": "^1.0"
+            },
+            "provide": {
+                "container-interop/container-interop-implementation": "^1.2",
+                "psr/container-implementation": "^1.0"
+            },
+            "replace": {
+                "zendframework/zend-servicemanager": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "mikey179/vfsstream": "^1.6.5",
+                "ocramius/proxy-manager": "^1.0 || ^2.0",
+                "phpbench/phpbench": "^0.13.0",
+                "phpunit/phpunit": "^5.7.25 || ^6.4.4"
+            },
+            "suggest": {
+                "laminas/laminas-stdlib": "laminas-stdlib ^2.5 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances",
+                "ocramius/proxy-manager": "ProxyManager 1.* to handle lazy initialization of services"
+            },
+            "bin": [
+                "bin/generate-deps-for-config-factory",
+                "bin/generate-factory-for-class"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev",
+                    "dev-develop": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\ServiceManager\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\ServiceManager\\": "test/",
+                    "LaminasBench\\ServiceManager\\": "benchmarks/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ],
+                "upload-coverage": [
+                    "coveralls -v"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Factory-Driven Dependency Injection Container",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "dependency-injection",
+                "di",
+                "dic",
+                "laminas",
+                "psr-11",
+                "service-manager",
+                "servicemanager"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-servicemanager/",
+                "issues": "https://github.com/laminas/laminas-servicemanager/issues",
+                "source": "https://github.com/laminas/laminas-servicemanager",
+                "rss": "https://github.com/laminas/laminas-servicemanager/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:48:02+00:00"
+        },
+        {
+            "name": "laminas/laminas-stdlib",
+            "version": "3.2.1",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-stdlib",
+                "reference": "04da5f17213da8aeacf89e3400a763aa1f98b35e"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-stdlib/laminas-laminas-stdlib-3.2.1-bd175d.tar",
+                "reference": "04da5f17213da8aeacf89e3400a763aa1f98b35e",
+                "shasum": "2445288fb0d2676a160b73cfeffb4bfe799b7cc2"
+            },
+            "require": {
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "phpbench/phpbench": "^0.13",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev",
+                    "dev-develop": "3.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Stdlib\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Stdlib\\": "test/",
+                    "LaminasBench\\Stdlib\\": "benchmark/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "SPL extensions, array utilities, error handlers, and more",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "stdlib"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-stdlib/",
+                "issues": "https://github.com/laminas/laminas-stdlib/issues",
+                "source": "https://github.com/laminas/laminas-stdlib",
+                "rss": "https://github.com/laminas/laminas-stdlib/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:54:31+00:00"
+        },
+        {
+            "name": "laminas/laminas-uri",
+            "version": "2.7.1",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-uri",
+                "reference": "0259320a78060fc2e006d5c5a39d2d77b59a28fc"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-uri/laminas-laminas-uri-2.7.1-4ecfaf.tar",
+                "reference": "0259320a78060fc2e006d5c5a39d2d77b59a28fc",
+                "shasum": "f6cd814ec18bb5375319c8f62acde21f835ec190"
+            },
+            "require": {
+                "laminas/laminas-escaper": "^2.5",
+                "laminas/laminas-validator": "^2.10",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-uri": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7.x-dev",
+                    "dev-develop": "2.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Uri\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Uri\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A component that aids in manipulating and validating » Uniform Resource Identifiers (URIs)",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "uri"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-uri/",
+                "issues": "https://github.com/laminas/laminas-uri/issues",
+                "source": "https://github.com/laminas/laminas-uri",
+                "rss": "https://github.com/laminas/laminas-uri/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:59:23+00:00"
+        },
+        {
+            "name": "laminas/laminas-validator",
+            "version": "2.12.2",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-validator",
+                "reference": "2b5ccaebf54e190433a6562ce526be86039b1c3a"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-validator/laminas-laminas-validator-2.12.2-ac1e4b.tar",
+                "reference": "2b5ccaebf54e190433a6562ce526be86039b1c3a",
+                "shasum": "f5aa08ac6295f633c83daff22eef2a070a03a641"
+            },
+            "require": {
+                "container-interop/container-interop": "^1.1",
+                "laminas/laminas-stdlib": "^3.2.1",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-validator": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-cache": "^2.6.1",
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-config": "^2.6",
+                "laminas/laminas-db": "^2.7",
+                "laminas/laminas-filter": "^2.6",
+                "laminas/laminas-http": "^2.5.4",
+                "laminas/laminas-i18n": "^2.6",
+                "laminas/laminas-math": "^2.6",
+                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+                "laminas/laminas-session": "^2.8",
+                "laminas/laminas-uri": "^2.5",
+                "phpunit/phpunit": "^6.0.8 || ^5.7.15",
+                "psr/http-message": "^1.0"
+            },
+            "suggest": {
+                "laminas/laminas-db": "Laminas\\Db component, required by the (No)RecordExists validator",
+                "laminas/laminas-filter": "Laminas\\Filter component, required by the Digits validator",
+                "laminas/laminas-i18n": "Laminas\\I18n component to allow translation of validation error messages",
+                "laminas/laminas-i18n-resources": "Translations of validator messages",
+                "laminas/laminas-math": "Laminas\\Math component, required by the Csrf validator",
+                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component to allow using the ValidatorPluginManager and validator chains",
+                "laminas/laminas-session": "Laminas\\Session component, ^2.8; required by the Csrf validator",
+                "laminas/laminas-uri": "Laminas\\Uri component, required by the Uri and Sitemap\\Loc validators",
+                "psr/http-message": "psr/http-message, required when validating PSR-7 UploadedFileInterface instances via the Upload and UploadFile validators"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.12.x-dev",
+                    "dev-develop": "2.13.x-dev"
+                },
+                "laminas": {
+                    "component": "Laminas\\Validator",
+                    "config-provider": "Laminas\\Validator\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Validator\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Validator\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Validation classes for a wide range of domains, and the ability to chain validators to create complex validation criteria",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "validator"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-validator/",
+                "issues": "https://github.com/laminas/laminas-validator/issues",
+                "source": "https://github.com/laminas/laminas-validator",
+                "rss": "https://github.com/laminas/laminas-validator/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T20:01:10+00:00"
+        },
+        {
+            "name": "laminas/laminas-view",
+            "version": "2.11.4",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-view",
+                "reference": "15a7666216c8e750ab43b5fab1b46feacbfd0d89"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-view/laminas-laminas-view-2.11.4-425d99.tar",
+                "reference": "15a7666216c8e750ab43b5fab1b46feacbfd0d89",
+                "shasum": "22f721eb90ec39433690c043574910aa0c45e0ba"
+            },
+            "require": {
+                "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
+                "laminas/laminas-json": "^2.6.1 || ^3.0",
+                "laminas/laminas-loader": "^2.5",
+                "laminas/laminas-stdlib": "^2.7 || ^3.0",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-view": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-authentication": "^2.5",
+                "laminas/laminas-cache": "^2.6.1",
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-config": "^2.6",
+                "laminas/laminas-console": "^2.6",
+                "laminas/laminas-escaper": "^2.5",
+                "laminas/laminas-feed": "^2.7",
+                "laminas/laminas-filter": "^2.6.1",
+                "laminas/laminas-http": "^2.5.4",
+                "laminas/laminas-i18n": "^2.6",
+                "laminas/laminas-log": "^2.7",
+                "laminas/laminas-modulemanager": "^2.7.1",
+                "laminas/laminas-mvc": "^2.7.14 || ^3.0",
+                "laminas/laminas-navigation": "^2.5",
+                "laminas/laminas-paginator": "^2.5",
+                "laminas/laminas-permissions-acl": "^2.6",
+                "laminas/laminas-router": "^3.0.1",
+                "laminas/laminas-serializer": "^2.6.1",
+                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+                "laminas/laminas-session": "^2.8.1",
+                "laminas/laminas-uri": "^2.5",
+                "phpunit/phpunit": "^5.7.15 || ^6.0.8"
+            },
+            "suggest": {
+                "laminas/laminas-authentication": "Laminas\\Authentication component",
+                "laminas/laminas-escaper": "Laminas\\Escaper component",
+                "laminas/laminas-feed": "Laminas\\Feed component",
+                "laminas/laminas-filter": "Laminas\\Filter component",
+                "laminas/laminas-http": "Laminas\\Http component",
+                "laminas/laminas-i18n": "Laminas\\I18n component",
+                "laminas/laminas-mvc": "Laminas\\Mvc component",
+                "laminas/laminas-mvc-plugin-flashmessenger": "laminas-mvc-plugin-flashmessenger component, if you want to use the FlashMessenger view helper with laminas-mvc versions 3 and up",
+                "laminas/laminas-navigation": "Laminas\\Navigation component",
+                "laminas/laminas-paginator": "Laminas\\Paginator component",
+                "laminas/laminas-permissions-acl": "Laminas\\Permissions\\Acl component",
+                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component",
+                "laminas/laminas-uri": "Laminas\\Uri component"
+            },
+            "bin": [
+                "bin/templatemap_generator.php"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.11.x-dev",
+                    "dev-develop": "2.12.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\View\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "files": [
+                    "test/autoload.php"
+                ],
+                "psr-4": {
+                    "LaminasTest\\View\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Flexible view layer supporting and providing multiple view layers, helpers, and more",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "view"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-view/",
+                "issues": "https://github.com/laminas/laminas-view/issues",
+                "source": "https://github.com/laminas/laminas-view",
+                "rss": "https://github.com/laminas/laminas-view/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T20:06:17+00:00"
+        },
+        {
+            "name": "laminas/laminas-zendframework-bridge",
+            "version": "0.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
+                "reference": "bb83db06ec80e683a9f8bb5913eea41df0405566"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/bb83db06ec80e683a9f8bb5913eea41df0405566",
+                "reference": "bb83db06ec80e683a9f8bb5913eea41df0405566",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.1",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                },
+                "laminas": {
+                    "module": "Laminas\\ZendFrameworkBridge"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/autoload.php"
+                ],
+                "psr-4": {
+                    "Laminas\\ZendFrameworkBridge\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Alias legacy ZF class names to Laminas Project equivalents.",
+            "keywords": [
+                "ZendFramework",
+                "autoloading",
+                "laminas",
+                "zf"
+            ],
+            "time": "2019-12-23T17:21:43+00:00"
         },
         {
             "name": "psr/container",
@@ -137,878 +1616,6 @@
                 "standards"
             ],
             "time": "2019-12-04T04:46:47+00:00"
-        },
-        {
-            "name": "zendframework/zend-config",
-            "version": "2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-config.git",
-                "reference": "2920e877a9f6dca9fa8f6bd3b1ffc2e19bb1e30d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-config/zipball/2920e877a9f6dca9fa8f6bd3b1ffc2e19bb1e30d",
-                "reference": "2920e877a9f6dca9fa8f6bd3b1ffc2e19bb1e30d",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5 || ^7.0",
-                "zendframework/zend-stdlib": "^2.7 || ^3.0"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
-                "zendframework/zend-filter": "^2.6",
-                "zendframework/zend-i18n": "^2.5",
-                "zendframework/zend-json": "^2.6.1",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
-            },
-            "suggest": {
-                "zendframework/zend-filter": "Zend\\Filter component",
-                "zendframework/zend-i18n": "Zend\\I18n component",
-                "zendframework/zend-json": "Zend\\Json to use the Json reader or writer classes",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager for use with the Config Factory to retrieve reader and writer instances"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6-dev",
-                    "dev-develop": "2.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Config\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "provides a nested object property based user interface for accessing this configuration data within application code",
-            "homepage": "https://github.com/zendframework/zend-config",
-            "keywords": [
-                "config",
-                "zf2"
-            ],
-            "time": "2016-02-04T23:01:10+00:00"
-        },
-        {
-            "name": "zendframework/zend-console",
-            "version": "2.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-console.git",
-                "reference": "95817ae78f73c48026972e350a2ecc31c6d9f9ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-console/zipball/95817ae78f73c48026972e350a2ecc31c6d9f9ae",
-                "reference": "95817ae78f73c48026972e350a2ecc31c6d9f9ae",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-stdlib": "^3.2.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.23 || ^6.4.3",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-filter": "^2.7.2",
-                "zendframework/zend-json": "^2.6 || ^3.0",
-                "zendframework/zend-validator": "^2.10.1"
-            },
-            "suggest": {
-                "zendframework/zend-filter": "To support DefaultRouteMatcher usage",
-                "zendframework/zend-validator": "To support DefaultRouteMatcher usage"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8.x-dev",
-                    "dev-develop": "2.9.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Console\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Build console applications using getopt syntax or routing, complete with prompts",
-            "keywords": [
-                "ZendFramework",
-                "console",
-                "zf"
-            ],
-            "time": "2019-02-04T19:48:22+00:00"
-        },
-        {
-            "name": "zendframework/zend-escaper",
-            "version": "2.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-escaper.git",
-                "reference": "3801caa21b0ca6aca57fa1c42b08d35c395ebd5f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/3801caa21b0ca6aca57fa1c42b08d35c395ebd5f",
-                "reference": "3801caa21b0ca6aca57fa1c42b08d35c395ebd5f",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
-                "zendframework/zend-coding-standard": "~1.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6.x-dev",
-                    "dev-develop": "2.7.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Escaper\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Securely and safely escape HTML, HTML attributes, JavaScript, CSS, and URLs",
-            "keywords": [
-                "ZendFramework",
-                "escaper",
-                "zf"
-            ],
-            "time": "2019-09-05T20:03:20+00:00"
-        },
-        {
-            "name": "zendframework/zend-eventmanager",
-            "version": "3.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-eventmanager.git",
-                "reference": "a5e2583a211f73604691586b8406ff7296a946dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/a5e2583a211f73604691586b8406ff7296a946dd",
-                "reference": "a5e2583a211f73604691586b8406ff7296a946dd",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "athletic/athletic": "^0.1",
-                "container-interop/container-interop": "^1.1.0",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-stdlib": "^2.7.3 || ^3.0"
-            },
-            "suggest": {
-                "container-interop/container-interop": "^1.1.0, to use the lazy listeners feature",
-                "zendframework/zend-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2-dev",
-                    "dev-develop": "3.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\EventManager\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Trigger and listen to events within a PHP application",
-            "homepage": "https://github.com/zendframework/zend-eventmanager",
-            "keywords": [
-                "event",
-                "eventmanager",
-                "events",
-                "zf2"
-            ],
-            "time": "2018-04-25T15:33:34+00:00"
-        },
-        {
-            "name": "zendframework/zend-http",
-            "version": "2.11.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-http.git",
-                "reference": "76000da8490b8685d63ff6f6ff8eefa459f6e9e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/76000da8490b8685d63ff6f6ff8eefa459f6e9e7",
-                "reference": "76000da8490b8685d63ff6f6ff8eefa459f6e9e7",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-loader": "^2.5.1",
-                "zendframework/zend-stdlib": "^3.2.1",
-                "zendframework/zend-uri": "^2.5.2",
-                "zendframework/zend-validator": "^2.10.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.3",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-config": "^3.1 || ^2.6"
-            },
-            "suggest": {
-                "paragonie/certainty": "For automated management of cacert.pem"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.11.x-dev",
-                    "dev-develop": "2.12.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Http\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Provides an easy interface for performing Hyper-Text Transfer Protocol (HTTP) requests",
-            "keywords": [
-                "ZendFramework",
-                "http",
-                "http client",
-                "zend",
-                "zf"
-            ],
-            "time": "2019-12-04T23:02:34+00:00"
-        },
-        {
-            "name": "zendframework/zend-json",
-            "version": "3.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-json.git",
-                "reference": "e9ddb1192d93fe7fff846ac895249c39db75132b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-json/zipball/e9ddb1192d93fe7fff846ac895249c39db75132b",
-                "reference": "e9ddb1192d93fe7fff846ac895249c39db75132b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.23 || ^6.4.3",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-stdlib": "^2.7.7 || ^3.1"
-            },
-            "suggest": {
-                "zendframework/zend-json-server": "For implementing JSON-RPC servers",
-                "zendframework/zend-xml2json": "For converting XML documents to JSON"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1.x-dev",
-                    "dev-develop": "3.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Json\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
-            "keywords": [
-                "ZendFramework",
-                "json",
-                "zf"
-            ],
-            "time": "2019-10-09T13:56:13+00:00"
-        },
-        {
-            "name": "zendframework/zend-loader",
-            "version": "2.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-loader.git",
-                "reference": "91da574d29b58547385b2298c020b257310898c6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-loader/zipball/91da574d29b58547385b2298c020b257310898c6",
-                "reference": "91da574d29b58547385b2298c020b257310898c6",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.4",
-                "zendframework/zend-coding-standard": "~1.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6.x-dev",
-                    "dev-develop": "2.7.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Loader\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Autoloading and plugin loading strategies",
-            "keywords": [
-                "ZendFramework",
-                "loader",
-                "zf"
-            ],
-            "time": "2019-09-04T19:38:14+00:00"
-        },
-        {
-            "name": "zendframework/zend-modulemanager",
-            "version": "2.8.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-modulemanager.git",
-                "reference": "b2596d24b9a4e36a3cd114d35d3ad0918db9a243"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-modulemanager/zipball/b2596d24b9a4e36a3cd114d35d3ad0918db9a243",
-                "reference": "b2596d24b9a4e36a3cd114d35d3ad0918db9a243",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-config": "^3.1 || ^2.6",
-                "zendframework/zend-eventmanager": "^3.2 || ^2.6.3",
-                "zendframework/zend-stdlib": "^3.1 || ^2.7"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-console": "^2.6",
-                "zendframework/zend-di": "^2.6",
-                "zendframework/zend-loader": "^2.5",
-                "zendframework/zend-mvc": "^3.0 || ^2.7",
-                "zendframework/zend-servicemanager": "^3.0.3 || ^2.7.5"
-            },
-            "suggest": {
-                "zendframework/zend-console": "Zend\\Console component",
-                "zendframework/zend-loader": "Zend\\Loader component if you are not using Composer autoloading for your modules",
-                "zendframework/zend-mvc": "Zend\\Mvc component",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8.x-dev",
-                    "dev-develop": "2.9.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\ModuleManager\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Modular application system for zend-mvc applications",
-            "keywords": [
-                "ZendFramework",
-                "modulemanager",
-                "zf"
-            ],
-            "time": "2019-10-28T13:29:38+00:00"
-        },
-        {
-            "name": "zendframework/zend-mvc",
-            "version": "3.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-mvc.git",
-                "reference": "236e7e1e3757e988fa06530c0a3f96a148858ae8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-mvc/zipball/236e7e1e3757e988fa06530c0a3f96a148858ae8",
-                "reference": "236e7e1e3757e988fa06530c0a3f96a148858ae8",
-                "shasum": ""
-            },
-            "require": {
-                "container-interop/container-interop": "^1.2",
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-eventmanager": "^3.2",
-                "zendframework/zend-http": "^2.7",
-                "zendframework/zend-modulemanager": "^2.8",
-                "zendframework/zend-router": "^3.0.2",
-                "zendframework/zend-servicemanager": "^3.3",
-                "zendframework/zend-stdlib": "^3.1",
-                "zendframework/zend-view": "^2.9"
-            },
-            "require-dev": {
-                "http-interop/http-middleware": "^0.4.1",
-                "phpunit/phpunit": "^6.4.4 || ^5.7.14",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-json": "^2.6.1 || ^3.0",
-                "zendframework/zend-psr7bridge": "^1.0",
-                "zendframework/zend-stratigility": "^2.0.1"
-            },
-            "suggest": {
-                "http-interop/http-middleware": "^0.4.1 to be used together with zend-stratigility",
-                "zendframework/zend-json": "(^2.6.1 || ^3.0) To auto-deserialize JSON body content in AbstractRestfulController extensions, when json_decode is unavailable",
-                "zendframework/zend-log": "^2.9.1  To provide log functionality via LogFilterManager, LogFormatterManager, and LogProcessorManager",
-                "zendframework/zend-mvc-console": "zend-mvc-console provides the ability to expose zend-mvc as a console application",
-                "zendframework/zend-mvc-i18n": "zend-mvc-i18n provides integration with zend-i18n, including a translation bridge and translatable route segments",
-                "zendframework/zend-mvc-plugin-fileprg": "To provide Post/Redirect/Get functionality around forms that container file uploads",
-                "zendframework/zend-mvc-plugin-flashmessenger": "To provide flash messaging capabilities between requests",
-                "zendframework/zend-mvc-plugin-identity": "To access the authenticated identity (per zend-authentication) in controllers",
-                "zendframework/zend-mvc-plugin-prg": "To provide Post/Redirect/Get functionality within controllers",
-                "zendframework/zend-paginator": "^2.7 To provide pagination functionality via PaginatorPluginManager",
-                "zendframework/zend-psr7bridge": "(^0.2) To consume PSR-7 middleware within the MVC workflow",
-                "zendframework/zend-servicemanager-di": "zend-servicemanager-di provides utilities for integrating zend-di and zend-servicemanager in your zend-mvc application",
-                "zendframework/zend-stratigility": "zend-stratigility is required to use middleware pipes in the MiddlewareListener"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev",
-                    "dev-develop": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Mvc\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Zend Framework's event-driven MVC layer, including MVC Applications, Controllers, and Plugins",
-            "keywords": [
-                "ZendFramework",
-                "mvc",
-                "zf"
-            ],
-            "time": "2017-11-24T06:32:07+00:00"
-        },
-        {
-            "name": "zendframework/zend-router",
-            "version": "3.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-router.git",
-                "reference": "b113a4cfd910ee4723079fa58a9bcf3198631620"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-router/zipball/b113a4cfd910ee4723079fa58a9bcf3198631620",
-                "reference": "b113a4cfd910ee4723079fa58a9bcf3198631620",
-                "shasum": ""
-            },
-            "require": {
-                "container-interop/container-interop": "^1.2",
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-http": "^2.8.1",
-                "zendframework/zend-servicemanager": "^2.7.8 || ^3.3",
-                "zendframework/zend-stdlib": "^3.2.1"
-            },
-            "conflict": {
-                "zendframework/zend-mvc": "<3.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.22 || ^6.4.1",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-i18n": "^2.7.4"
-            },
-            "suggest": {
-                "zendframework/zend-i18n": "^2.7.4, if defining translatable HTTP path segments"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev",
-                    "dev-develop": "4.0.x-dev"
-                },
-                "zf": {
-                    "component": "Zend\\Router",
-                    "config-provider": "Zend\\Router\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Router\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Flexible routing system for HTTP and console applications",
-            "keywords": [
-                "ZendFramework",
-                "mvc",
-                "routing",
-                "zend",
-                "zf"
-            ],
-            "time": "2019-02-26T20:24:12+00:00"
-        },
-        {
-            "name": "zendframework/zend-servicemanager",
-            "version": "3.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-servicemanager.git",
-                "reference": "a1ed6140d0d3ee803fec96582593ed024950067b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/a1ed6140d0d3ee803fec96582593ed024950067b",
-                "reference": "a1ed6140d0d3ee803fec96582593ed024950067b",
-                "shasum": ""
-            },
-            "require": {
-                "container-interop/container-interop": "^1.2",
-                "php": "^5.6 || ^7.0",
-                "psr/container": "^1.0",
-                "zendframework/zend-stdlib": "^3.2.1"
-            },
-            "provide": {
-                "container-interop/container-interop-implementation": "^1.2",
-                "psr/container-implementation": "^1.0"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "^1.6.5",
-                "ocramius/proxy-manager": "^1.0 || ^2.0",
-                "phpbench/phpbench": "^0.13.0",
-                "phpunit/phpunit": "^5.7.25 || ^6.4.4",
-                "zendframework/zend-coding-standard": "~1.0.0"
-            },
-            "suggest": {
-                "ocramius/proxy-manager": "ProxyManager 1.* to handle lazy initialization of services",
-                "zendframework/zend-stdlib": "zend-stdlib ^2.5 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances"
-            },
-            "bin": [
-                "bin/generate-deps-for-config-factory",
-                "bin/generate-factory-for-class"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3-dev",
-                    "dev-develop": "4.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\ServiceManager\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Factory-Driven Dependency Injection Container",
-            "keywords": [
-                "PSR-11",
-                "ZendFramework",
-                "dependency-injection",
-                "di",
-                "dic",
-                "service-manager",
-                "servicemanager",
-                "zf"
-            ],
-            "time": "2018-12-22T06:05:09+00:00"
-        },
-        {
-            "name": "zendframework/zend-stdlib",
-            "version": "3.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-stdlib.git",
-                "reference": "66536006722aff9e62d1b331025089b7ec71c065"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/66536006722aff9e62d1b331025089b7ec71c065",
-                "reference": "66536006722aff9e62d1b331025089b7ec71c065",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "phpbench/phpbench": "^0.13",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
-                "zendframework/zend-coding-standard": "~1.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev",
-                    "dev-develop": "3.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Stdlib\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "SPL extensions, array utilities, error handlers, and more",
-            "keywords": [
-                "ZendFramework",
-                "stdlib",
-                "zf"
-            ],
-            "time": "2018-08-28T21:34:05+00:00"
-        },
-        {
-            "name": "zendframework/zend-uri",
-            "version": "2.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-uri.git",
-                "reference": "bfc4a5b9a309711e968d7c72afae4ac50c650083"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-uri/zipball/bfc4a5b9a309711e968d7c72afae4ac50c650083",
-                "reference": "bfc4a5b9a309711e968d7c72afae4ac50c650083",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-escaper": "^2.5",
-                "zendframework/zend-validator": "^2.10"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.4",
-                "zendframework/zend-coding-standard": "~1.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.7.x-dev",
-                    "dev-develop": "2.8.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Uri\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "A component that aids in manipulating and validating » Uniform Resource Identifiers (URIs)",
-            "keywords": [
-                "ZendFramework",
-                "uri",
-                "zf"
-            ],
-            "time": "2019-10-07T13:35:33+00:00"
-        },
-        {
-            "name": "zendframework/zend-validator",
-            "version": "2.12.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "fd24920c2afcf2a70d11f67c3457f8f509453a62"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/fd24920c2afcf2a70d11f67c3457f8f509453a62",
-                "reference": "fd24920c2afcf2a70d11f67c3457f8f509453a62",
-                "shasum": ""
-            },
-            "require": {
-                "container-interop/container-interop": "^1.1",
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-stdlib": "^3.2.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.0.8 || ^5.7.15",
-                "psr/http-message": "^1.0",
-                "zendframework/zend-cache": "^2.6.1",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-config": "^2.6",
-                "zendframework/zend-db": "^2.7",
-                "zendframework/zend-filter": "^2.6",
-                "zendframework/zend-http": "^2.5.4",
-                "zendframework/zend-i18n": "^2.6",
-                "zendframework/zend-math": "^2.6",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
-                "zendframework/zend-session": "^2.8",
-                "zendframework/zend-uri": "^2.5"
-            },
-            "suggest": {
-                "psr/http-message": "psr/http-message, required when validating PSR-7 UploadedFileInterface instances via the Upload and UploadFile validators",
-                "zendframework/zend-db": "Zend\\Db component, required by the (No)RecordExists validator",
-                "zendframework/zend-filter": "Zend\\Filter component, required by the Digits validator",
-                "zendframework/zend-i18n": "Zend\\I18n component to allow translation of validation error messages",
-                "zendframework/zend-i18n-resources": "Translations of validator messages",
-                "zendframework/zend-math": "Zend\\Math component, required by the Csrf validator",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager component to allow using the ValidatorPluginManager and validator chains",
-                "zendframework/zend-session": "Zend\\Session component, ^2.8; required by the Csrf validator",
-                "zendframework/zend-uri": "Zend\\Uri component, required by the Uri and Sitemap\\Loc validators"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.12.x-dev",
-                    "dev-develop": "2.13.x-dev"
-                },
-                "zf": {
-                    "component": "Zend\\Validator",
-                    "config-provider": "Zend\\Validator\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Validator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Validation classes for a wide range of domains, and the ability to chain validators to create complex validation criteria",
-            "keywords": [
-                "ZendFramework",
-                "validator",
-                "zf"
-            ],
-            "time": "2019-10-29T08:33:25+00:00"
-        },
-        {
-            "name": "zendframework/zend-view",
-            "version": "2.11.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-view.git",
-                "reference": "a8b1b2d9b52e191539be861a6529f8c8a0c06b9d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-view/zipball/a8b1b2d9b52e191539be861a6529f8c8a0c06b9d",
-                "reference": "a8b1b2d9b52e191539be861a6529f8c8a0c06b9d",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-                "zendframework/zend-json": "^2.6.1 || ^3.0",
-                "zendframework/zend-loader": "^2.5",
-                "zendframework/zend-stdlib": "^2.7 || ^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.15 || ^6.0.8",
-                "zendframework/zend-authentication": "^2.5",
-                "zendframework/zend-cache": "^2.6.1",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-config": "^2.6",
-                "zendframework/zend-console": "^2.6",
-                "zendframework/zend-escaper": "^2.5",
-                "zendframework/zend-feed": "^2.7",
-                "zendframework/zend-filter": "^2.6.1",
-                "zendframework/zend-http": "^2.5.4",
-                "zendframework/zend-i18n": "^2.6",
-                "zendframework/zend-log": "^2.7",
-                "zendframework/zend-modulemanager": "^2.7.1",
-                "zendframework/zend-mvc": "^2.7.14 || ^3.0",
-                "zendframework/zend-navigation": "^2.5",
-                "zendframework/zend-paginator": "^2.5",
-                "zendframework/zend-permissions-acl": "^2.6",
-                "zendframework/zend-router": "^3.0.1",
-                "zendframework/zend-serializer": "^2.6.1",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
-                "zendframework/zend-session": "^2.8.1",
-                "zendframework/zend-uri": "^2.5"
-            },
-            "suggest": {
-                "zendframework/zend-authentication": "Zend\\Authentication component",
-                "zendframework/zend-escaper": "Zend\\Escaper component",
-                "zendframework/zend-feed": "Zend\\Feed component",
-                "zendframework/zend-filter": "Zend\\Filter component",
-                "zendframework/zend-http": "Zend\\Http component",
-                "zendframework/zend-i18n": "Zend\\I18n component",
-                "zendframework/zend-mvc": "Zend\\Mvc component",
-                "zendframework/zend-mvc-plugin-flashmessenger": "zend-mvc-plugin-flashmessenger component, if you want to use the FlashMessenger view helper with zend-mvc versions 3 and up",
-                "zendframework/zend-navigation": "Zend\\Navigation component",
-                "zendframework/zend-paginator": "Zend\\Paginator component",
-                "zendframework/zend-permissions-acl": "Zend\\Permissions\\Acl component",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
-                "zendframework/zend-uri": "Zend\\Uri component"
-            },
-            "bin": [
-                "bin/templatemap_generator.php"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.11.x-dev",
-                    "dev-develop": "2.12.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\View\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Flexible view layer supporting and providing multiple view layers, helpers, and more",
-            "keywords": [
-                "ZendFramework",
-                "view",
-                "zf"
-            ],
-            "time": "2019-12-04T08:40:50+00:00"
         }
     ],
     "packages-dev": [
@@ -1232,6 +1839,307 @@
                 "zf3"
             ],
             "time": "2019-08-08T18:51:23+00:00"
+        },
+        {
+            "name": "laminas/laminas-i18n",
+            "version": "2.9.2",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-i18n",
+                "reference": "ad5b064e5886fe2126174e2ca57a80eb79c64b2a"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-i18n/laminas-laminas-i18n-2.9.2-261e08.tar",
+                "reference": "ad5b064e5886fe2126174e2ca57a80eb79c64b2a",
+                "shasum": "3bb60e1006fc52b470273dc0465facd09524595d"
+            },
+            "require": {
+                "laminas/laminas-stdlib": "^2.7 || ^3.0",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-i18n": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-cache": "^2.6.1",
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-config": "^2.6",
+                "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
+                "laminas/laminas-filter": "^2.6.1",
+                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+                "laminas/laminas-validator": "^2.6",
+                "laminas/laminas-view": "^2.6.3",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16"
+            },
+            "suggest": {
+                "ext-intl": "Required for most features of Laminas\\I18n; included in default builds of PHP",
+                "laminas/laminas-cache": "Laminas\\Cache component",
+                "laminas/laminas-config": "Laminas\\Config component",
+                "laminas/laminas-eventmanager": "You should install this package to use the events in the translator",
+                "laminas/laminas-filter": "You should install this package to use the provided filters",
+                "laminas/laminas-i18n-resources": "Translation resources",
+                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component",
+                "laminas/laminas-validator": "You should install this package to use the provided validators",
+                "laminas/laminas-view": "You should install this package to use the provided view helpers"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.9.x-dev",
+                    "dev-develop": "2.10.x-dev"
+                },
+                "laminas": {
+                    "component": "Laminas\\I18n",
+                    "config-provider": "Laminas\\I18n\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\I18n\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\I18n\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Provide translations for your application, and filter and validate internationalized values",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "i18n",
+                "laminas"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-i18n/",
+                "issues": "https://github.com/laminas/laminas-i18n/issues",
+                "source": "https://github.com/laminas/laminas-i18n",
+                "rss": "https://github.com/laminas/laminas-i18n/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:12:11+00:00"
+        },
+        {
+            "name": "laminas/laminas-log",
+            "version": "2.11.0",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-log",
+                "reference": "39545de85f922478e1c1faab863220cca88b5658"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-log/laminas-laminas-log-2.11.0-e267ba.tar",
+                "reference": "39545de85f922478e1c1faab863220cca88b5658",
+                "shasum": "3242f11d277b1d63cb1130fa4c29f30223342b31"
+            },
+            "require": {
+                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+                "laminas/laminas-stdlib": "^2.7 || ^3.0",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0",
+                "psr/log": "^1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "replace": {
+                "zendframework/zend-log": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-db": "^2.6",
+                "laminas/laminas-escaper": "^2.5",
+                "laminas/laminas-filter": "^2.5",
+                "laminas/laminas-mail": "^2.6.1",
+                "laminas/laminas-validator": "^2.10.1",
+                "mikey179/vfsstream": "^1.6.7",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.15"
+            },
+            "suggest": {
+                "ext-mongo": "mongo extension to use Mongo writer",
+                "ext-mongodb": "mongodb extension to use MongoDB writer",
+                "laminas/laminas-db": "Laminas\\Db component to use the database log writer",
+                "laminas/laminas-escaper": "Laminas\\Escaper component, for use in the XML log formatter",
+                "laminas/laminas-mail": "Laminas\\Mail component to use the email log writer",
+                "laminas/laminas-validator": "Laminas\\Validator component to block invalid log messages"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.11.x-dev",
+                    "dev-develop": "2.12.x-dev"
+                },
+                "laminas": {
+                    "component": "Laminas\\Log",
+                    "config-provider": "Laminas\\Log\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Log\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Log\\": "test/"
+                },
+                "files": [
+                    "test/autoload.php",
+                    "test/Writer/TestAsset/chmod.php"
+                ]
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Robust, composite logger with filtering, formatting, and PSR-3 support",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "log",
+                "logging"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-log/",
+                "issues": "https://github.com/laminas/laminas-log/issues",
+                "source": "https://github.com/laminas/laminas-log",
+                "rss": "https://github.com/laminas/laminas-log/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:21:11+00:00"
+        },
+        {
+            "name": "laminas/laminas-serializer",
+            "version": "2.9.1",
+            "source": {
+                "type": "git",
+                "url": "/home/matthew/work/laminas/testing/laminas/laminas-serializer",
+                "reference": "f5e0f3c8b8e2a5613ef4bfde85624437b8ca67b6"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://laminas.mwop.net/repo/testing/dist/laminas/laminas-serializer/laminas-laminas-serializer-2.9.1-5f548f.tar",
+                "reference": "f5e0f3c8b8e2a5613ef4bfde85624437b8ca67b6",
+                "shasum": "cdac880739d2ef11ded84fd8a81878e2f37f303f"
+            },
+            "require": {
+                "laminas/laminas-json": "^2.5 || ^3.0",
+                "laminas/laminas-stdlib": "^2.7 || ^3.0",
+                "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "replace": {
+                "zendframework/zend-serializer": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-math": "^2.6 || ^3.0",
+                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16"
+            },
+            "suggest": {
+                "laminas/laminas-math": "(^2.6 || ^3.0) To support Python Pickle serialization",
+                "laminas/laminas-servicemanager": "(^2.7.5 || ^3.0.3) To support plugin manager support"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.9.x-dev",
+                    "dev-develop": "2.10.x-dev"
+                },
+                "laminas": {
+                    "component": "Laminas\\Serializer",
+                    "config-provider": "Laminas\\Serializer\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Serializer\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LaminasTest\\Serializer\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Serialize and deserialize PHP structures to a variety of representations",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "serializer"
+            ],
+            "support": {
+                "docs": "https://docs.laminas.dev/laminas-serializer/",
+                "issues": "https://github.com/laminas/laminas-serializer/issues",
+                "source": "https://github.com/laminas/laminas-serializer",
+                "rss": "https://github.com/laminas/laminas-serializer/releases.atom",
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev"
+            },
+            "time": "2019-12-23T19:45:17+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3271,201 +4179,6 @@
                 "validate"
             ],
             "time": "2019-11-24T13:36:37+00:00"
-        },
-        {
-            "name": "zendframework/zend-i18n",
-            "version": "2.9.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-i18n.git",
-                "reference": "e17a54b3aee333ab156958f570cde630acee8b07"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-i18n/zipball/e17a54b3aee333ab156958f570cde630acee8b07",
-                "reference": "e17a54b3aee333ab156958f570cde630acee8b07",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-stdlib": "^2.7 || ^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16",
-                "zendframework/zend-cache": "^2.6.1",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-config": "^2.6",
-                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-                "zendframework/zend-filter": "^2.6.1",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
-                "zendframework/zend-validator": "^2.6",
-                "zendframework/zend-view": "^2.6.3"
-            },
-            "suggest": {
-                "ext-intl": "Required for most features of Zend\\I18n; included in default builds of PHP",
-                "zendframework/zend-cache": "Zend\\Cache component",
-                "zendframework/zend-config": "Zend\\Config component",
-                "zendframework/zend-eventmanager": "You should install this package to use the events in the translator",
-                "zendframework/zend-filter": "You should install this package to use the provided filters",
-                "zendframework/zend-i18n-resources": "Translation resources",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
-                "zendframework/zend-validator": "You should install this package to use the provided validators",
-                "zendframework/zend-view": "You should install this package to use the provided view helpers"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.9.x-dev",
-                    "dev-develop": "2.10.x-dev"
-                },
-                "zf": {
-                    "component": "Zend\\I18n",
-                    "config-provider": "Zend\\I18n\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\I18n\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Provide translations for your application, and filter and validate internationalized values",
-            "keywords": [
-                "ZendFramework",
-                "i18n",
-                "zf"
-            ],
-            "time": "2019-09-30T12:04:37+00:00"
-        },
-        {
-            "name": "zendframework/zend-log",
-            "version": "2.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-log.git",
-                "reference": "cb278772afdacb1924342248a069330977625ae6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-log/zipball/cb278772afdacb1924342248a069330977625ae6",
-                "reference": "cb278772afdacb1924342248a069330977625ae6",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "psr/log": "^1.0",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
-                "zendframework/zend-stdlib": "^2.7 || ^3.0"
-            },
-            "provide": {
-                "psr/log-implementation": "1.0.0"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "^1.6.7",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.15",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-db": "^2.6",
-                "zendframework/zend-escaper": "^2.5",
-                "zendframework/zend-filter": "^2.5",
-                "zendframework/zend-mail": "^2.6.1",
-                "zendframework/zend-validator": "^2.10.1"
-            },
-            "suggest": {
-                "ext-mongo": "mongo extension to use Mongo writer",
-                "ext-mongodb": "mongodb extension to use MongoDB writer",
-                "zendframework/zend-db": "Zend\\Db component to use the database log writer",
-                "zendframework/zend-escaper": "Zend\\Escaper component, for use in the XML log formatter",
-                "zendframework/zend-mail": "Zend\\Mail component to use the email log writer",
-                "zendframework/zend-validator": "Zend\\Validator component to block invalid log messages"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.11.x-dev",
-                    "dev-develop": "2.12.x-dev"
-                },
-                "zf": {
-                    "component": "Zend\\Log",
-                    "config-provider": "Zend\\Log\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Log\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Robust, composite logger with filtering, formatting, and PSR-3 support",
-            "keywords": [
-                "ZendFramework",
-                "log",
-                "logging",
-                "zf"
-            ],
-            "time": "2019-08-23T21:28:18+00:00"
-        },
-        {
-            "name": "zendframework/zend-serializer",
-            "version": "2.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-serializer.git",
-                "reference": "6fb7ae016cfdf0cfcdfa2b989e6a65f351170e21"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-serializer/zipball/6fb7ae016cfdf0cfcdfa2b989e6a65f351170e21",
-                "reference": "6fb7ae016cfdf0cfcdfa2b989e6a65f351170e21",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-json": "^2.5 || ^3.0",
-                "zendframework/zend-stdlib": "^2.7 || ^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-math": "^2.6 || ^3.0",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
-            },
-            "suggest": {
-                "zendframework/zend-math": "(^2.6 || ^3.0) To support Python Pickle serialization",
-                "zendframework/zend-servicemanager": "(^2.7.5 || ^3.0.3) To support plugin manager support"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.9.x-dev",
-                    "dev-develop": "2.10.x-dev"
-                },
-                "zf": {
-                    "component": "Zend\\Serializer",
-                    "config-provider": "Zend\\Serializer\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Serializer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Serialize and deserialize PHP structures to a variety of representations",
-            "keywords": [
-                "ZendFramework",
-                "serializer",
-                "zf"
-            ],
-            "time": "2019-10-19T08:06:30+00:00"
         }
     ],
     "aliases": [],

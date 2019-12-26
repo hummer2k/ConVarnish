@@ -8,7 +8,7 @@
 namespace ConVarnish\Options;
 
 use Psr\Container\ContainerInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class VarnishOptionsFactory
 {

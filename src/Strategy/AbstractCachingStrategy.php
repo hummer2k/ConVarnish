@@ -9,9 +9,9 @@ namespace ConVarnish\Strategy;
 
 use ConVarnish\Listener\InjectCacheHeaderListener;
 use ConVarnish\Options\VarnishOptions;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Mvc\MvcEvent;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Mvc\MvcEvent;
 
 abstract class AbstractCachingStrategy implements CachingStrategyInterface
 {
