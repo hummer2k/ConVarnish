@@ -49,11 +49,5 @@
         "psr-4": {
             "ConVarnishTest\\": "tests/"
         }
-    },
-    "repositories": {
-        "laminas": {
-            "type": "composer",
-            "url": "https://laminas.mwop.net/repo/testing"
-        }
     }
 }
