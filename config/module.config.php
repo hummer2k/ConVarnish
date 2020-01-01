@@ -1,4 +1,9 @@
 <?php
+
+use ConVarnish\Controller\EsiController;
+use ConVarnish\View\Helper\EsiUrl;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+
 return [
     'view_manager' => [
         'template_path_stack' => [
@@ -7,15 +12,15 @@ return [
     ],
     'view_helpers' => [
         'invokables' => [
-            'ConVarnish\View\Helper\EsiUrl' => 'ConVarnish\View\Helper\EsiUrl'
+            EsiUrl::class => EsiUrl::class
         ],
         'aliases' => [
-            'esiUrl' => 'ConVarnish\View\Helper\EsiUrl'
+            'esiUrl' => EsiUrl::class
         ]
     ],
     'controllers' => [
-        'invokables' => [
-            'ConVarnish\Controller\Esi' => 'ConVarnish\Controller\EsiController'
+        'factories' => [
+            EsiController::class => InvokableFactory::class
         ]
     ],
     'router' => [
@@ -28,7 +33,7 @@ return [
                         'block' => '[A-Za-z0-9_.-]+'
                     ],
                     'defaults' => [
-                        'controller' => 'ConVarnish\Controller\Esi',
+                        'controller' => EsiController::class,
                         'action' => 'block'
                     ]
                 ]
