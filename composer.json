@@ -1,12 +1,13 @@
 {
     "name": "hummer2k/convarnish",
-    "description": "ZF2 varnish integration using ConLayout for ESI blocks.",
+    "description": "laminas-mvc varnish integration using ConLayout for ESI blocks.",
     "license": "MIT",
     "config": {
         "sort-packages": true
     },
     "keywords": [
-        "zf2",
+        "laminas",
+        "mvc",
         "cache",
         "varnish",
         "esi"
