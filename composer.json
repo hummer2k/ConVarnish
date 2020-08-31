@@ -28,7 +28,7 @@
         "laminas/laminas-mvc": "^3.0",
         "laminas/laminas-servicemanager": "^3.4",
         "laminas/laminas-view": "^2.11",
-        "laminas/laminas-dependency-plugin": "^0.2"
+        "laminas/laminas-dependency-plugin": "*"
     },
     "require-dev": {
         "laminas/laminas-serializer": "2.*",
